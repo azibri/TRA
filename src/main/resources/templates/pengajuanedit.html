@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="resource :: sumber">
+</head>
+<body>
+
+    <nav th:insert="sidenav :: navuser"></nav>
+
+	<div align="center">
+      <h1>Edit Pengajuan</h1>
+        <br />
+
+        <form th:action="@{/savepengajuan}" th:object="${pengajuan}" method="POST" id="edit">
+                <table border="0" cellpadding="10">
+                    <input type="hidden" th:value="${pengajuan.pengajuanId}" name="pengajuanId" readonly="readonly">
+                    <tr>
+                        <td>Pilih Tujuan Perjalanan Dinas</td>
+                        <td>
+                        <select class="form-control" th:value="${pengajuan.tujuandinasId}" name="tujuandinas">
+                            <option th:each="tujuan : ${listtujuandinas}" th:value="${tujuan.tujuandinasId}" th:text="${tujuan.tujuandinasNama}" th:selected="${tujuan.tujuandinasId} == ${tujuandinas_id}"></option>
+                        </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                        <td>Pilih Jenis Kendaraan</td>
+                        <td>
+                        <select class="form-control" th:value="${pengajuan.kendaraanId}" name="jeniskendaraan">
+                            <option th:each="kendaraan : ${listkendaraan}" th:value="${kendaraan.kendaraanId}" th:text="${kendaraan.kendaraanNama}" th:selected="${kendaraan.kendaraanId} == ${kendaraan_id}"></option>
+                        </select>
+                        </td>
+
+                        <!--<select/>
+                            <option th:each="i : ${#numbers.sequence(0, 100)}" th:value="${i}" th:text="${i}" th:selected="${i==2}"></option>
+                        </select>
+
+                        <input type="text" th:value="${pengajuan.kendaraanId}" name="jeniskendaraan">-->
+
+                    </tr>
+
+                    <tr>
+                        <td>Pilih nama</td>
+                        <td>
+                        <input type="hidden" th:value="${karyawan_id}" name="karyawan_id"/>
+                        <input type="text" th:value="${idkaryawan}" readonly="readonly"  />
+                        </td>
+
+                    </tr>
+
+                    <input type="hidden" th:value="${pengajuan.approvalId}">
+
+                    <input type="hidden" th:value="${pengajuan.deleted}">
+
+                    <tr>
+                        <td>Kota Asal</td>
+                        <td><input type="text" th:value="${pengajuan.pengajuanKotaAsal}" name="pengajuankotaasal" maxlength="50" /></td>
+                    </tr>
+                    <tr>
+                        <td>Kota Tujuan</td>
+                        <td><input type="text" th:value="${pengajuan.pengajuanKotaTujuan}" name="pengajuankotatujuan" maxlength="50" /></td>
+                    </tr>
+                    <tr>
+                        <td>Waktu Berangkat</td>
+                        <td>
+                        <select th:value="${pengajuan.pengajuanWaktuBerangkat}" name="pengajuanwaktuberangkat">
+                            <option th:each="waktuberangkat : ${listWaktuBerangkat}" th:value="${waktuberangkat}" th:text="${waktuberangkat}" th:selected="${waktuberangkat} == ${tanggalberangkat}" />
+                        </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Waktu Pulang</td>
+                        <td>
+                        <select th:value="${pengajuan.pengajuanWaktuPulang}" name="pengajuanwaktupulang">
+                            <option th:each="waktuberangkat : ${listWaktuBerangkat}" th:value="${waktuberangkat}" th:text="${waktuberangkat}" th:selected="${waktuberangkat} == ${tanggalpulang}"/>
+                        </select>
+                        </td>
+                    </tr>
+                    <tr>
+                    <td>Tanggal Berangkat</td>
+                        <td>
+                            <div class="form-group">
+                                <label for="tanggalberangkat">Tanggal Berangkat</label>
+                                <input type="date" name="pengajuantanggalberangkat" th:value="${pengajuan.pengajuanTanggalBerangkat}" id="tanggalberangkat" class="form-control">
+                               
+                                
+                            </div>
+                        </td>
+                        </tr>
+
+                        </tr>
+                     <tr>
+                        <td>Tanggal Pulang</td>
+                        <td>
+                              <div class="form-group">
+                                <label for="tanggalpulang">Tanggal Pulang</label>
+                                <input type="date" name="pengajuantanggalpulang" th:value="${pengajuan.pengajuanTanggalPulang}" id="tanggalpulang" class="form-control">   
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Hotel</td>
+                        <td><input type="text" name="pengajuanhotel" th:value="${pengajuan.pengajuanHotel}" maxlength="100" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" th:insert="button :: button.create"></td>                    
+                    </tr>
+                    
+                </table>
+            </form>
+
+    </div>
+
+
+</body>
+
+<script type="text/javascript">
+    
+    $('.input-group.date').datepicker({
+        autoclose: true,
+        todayHighlight: true
+    });
+
+
+    document.querySelector('#edit').addEventListener('submit', function(e) {
+        var form = this;
+
+        e.preventDefault();
+
+        Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, create it!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+        form.submit();
+        }
+        })
+        });
+
+</script>
+
+
+</html>

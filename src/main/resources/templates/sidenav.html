@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="resource :: sumber">
+    </head>
+    <body>
+
+        <nav th:fragment="navadmin">
+            <ul>
+                <li>
+                    <a href="/indexadmin">Dashboard</a>
+                </li>
+                <li>
+                    <a href="/karyawan">Karyawan</a>
+                </li>
+                <li>
+                    <a href="/listpengajuan">Pengajuan Ijin Dinas</a>
+                </li>
+                <li>
+                    <a href="/perjalanan">Perjalanan</a>
+                </li>
+                <li>
+                    <a href="/tujuandinas">Tujuan Dinas</a>
+                </li>
+                <li>
+                    <a href="/divisi">Divisi</a>
+                </li>
+                <li>
+                    <a href="/kendaraan">Kendaraan</a>
+                </li>
+                <form class="form-inline" th:action="@{/logout}" method="post">
+                    <input class="btn btn-danger form-control my-2 my-sm-0" type="submit" value="Logout"/>
+                </form>
+            </ul>
+
+        </nav>
+
+        <nav th:fragment="navuser">
+            <ul>
+                <li>
+                    <a href="/indexuser">Dashboard</a>
+                </li>
+                <li>
+                    <a href="/pengajuan">Pengajuan</a>
+                </li>
+                    <form class="form-inline" th:action="@{/logout}" method="post">
+                        <input class="btn btn-danger form-control my-2 my-sm-0" type="submit" value="Logout"/>
+                    </form>
+            </ul>
+
+        </nav>
+
+        <nav th:fragment="navmanajer">
+            <ul>
+                <li>
+                    <a href="/indexmanajer">Dashboard</a>
+                </li>
+                <li>
+                    <a href="/persetujuan">Pengajuan</a>
+                </li>
+                    <form class="form-inline" th:action="@{/logout}" method="post">
+                        <input class="btn btn-danger form-control my-2 my-sm-0" type="submit" value="Logout"/>
+                    </form>
+            </ul>
+
+        </nav>
+
+    </body>
+</html>

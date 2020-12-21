@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="resource :: sumber">
+<body>
+
+    <nav th:insert="sidenav :: navadmin"></nav>
+
+	<div align="center">
+        <br/>
+        <h1>Divisi</h1>
+        <br/>
+
+        <div class="col-md-8">
+            <div align="left">
+                <a data-toggle="modal" data-target="#modalcreate" th:insert = "button :: button.create"></a>
+            </div>
+            <br/>
+            <table class="table table-hover table-bordered">
+                <thead class='thead-light'>
+                    <tr>
+                        <th>No</th>
+                        <!--<th>Divisi ID</th>-->
+                        <th>Nama Divisi</th>
+                        <th>Keterangan</th>
+                        <th>Aksi</th>  
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr th:each="divisi, iterStat : ${listdivisi}">
+                        <td th:text="${iterStat.count}">No</td>
+                        <!--<td th:text="">Divisi ID</td>-->
+                        <td th:text="${divisi.divisiNama}">Nama Divisi</td>
+                        <td th:text="${divisi.divisiKeterangan}">Keterangan</td>
+                        <td>
+                            <!--<a th:href="" class="btn btn-warning btn-sm" role="button">Edit</a>
+                            <a th:href="" class="delete btn btn-danger btn-sm" role="button">Delete</a>-->
+
+                            <a th:href="@{/editdivisi/(divisi_id=${divisi.divisiId})}" class="edit btn btn-warning btn-sm" role="button">Edit</a>
+                            <a th:href="@{'/deletedivisi/' + ${divisi.divisiId}}" class="delete btn btn-danger btn-sm" th:data-id='${divisi.divisiId}' role="button">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+    <!--Modal Create-->
+        <div class="myForm">
+            <!--Modal-->
+            <div id="modalcreate" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!--konten Modal-->
+                    <div class="modal-content">
+
+                        <!--Modal heading-->
+                        <div class="modal-header">
+
+
+                            <h5 class="modal-title">Create New Divisi</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
+                        </div>
+
+                        <!--modal body-->
+                        <div class="modal-body">
+
+
+                            <form th:action="@{/savedivisi}" th:object="${divisi}" method="POST" id="add">
+                                <!--<input type="hidden" id="id" name="id" value="" th:field="*{tujuandinasId}">-->
+
+                                <div class="form-group">
+                                    Nama Tujuan Dinas
+                                    <input th:field="*{divisiNama}" type="text" maxlength="50" class="form-control">
+                                </div>
+
+
+                                <div class="form-group">
+                                    Keterangan
+                                    <textarea th:field="*{divisiKeterangan}" maxlength="100" class="form-control"></textarea>
+                                </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <!--<button href="/addkendaraan"  type="submit" class="btn btn-primary">Create</button>-->
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                        </form>
+
+                    </div>    
+                </div>
+            </div>
+        </div>
+
+
+
+        <!--Modal Edit-->
+        <div class="myForm">
+            <!--Modal-->
+            <div id="modaledit" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!--konten Modal-->
+                    <div class="modal-content">
+
+                        <!--Modal heading-->
+                        <div class="modal-header">
+
+
+                            <h5 class="modal-title">Edit Divisi</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
+                        </div>
+
+                        <!--modal body-->
+                        <div class="modal-body">
+
+
+                            <form th:action="@{/savedivisi}" method="POST" id="edit">
+                                <input type="hidden" id="id" name="divisiId" readonly="readonly">
+
+                                <div class="form-group">
+                                    Nama Tujuan Dinas
+                                    <input id="nama" name="divisiNama" type="text" maxlength="50" class="form-control">
+                                </div>
+
+
+                                <div class="form-group">
+                                    Keterangan
+                                    <textarea id="keterangan" name="divisiKeterangan" maxlength="100" class="form-control"></textarea>
+                                </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <!--<button href="/addkendaraan"  type="submit" class="btn btn-primary">Create</button>-->
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                        </form>
+
+                    </div>    
+                </div>
+            </div>
+        </div>
+
+
+
+
+</body>
+
+<script type="text/javascript">
+
+
+    $('document').ready(function() {
+            $('.table .edit').on('click', function(event) {
+
+                event.preventDefault();
+
+                var href = $(this).attr('href');
+
+                $.get(href, function(divisi, status){
+                $('#id').val(divisi.divisiId);
+                $('#nama').val(divisi.divisiNama);
+                $('#keterangan').val(divisi.divisiKeterangan);
+                });
+
+                $('#modaledit').modal();
+
+            });
+    });
+
+
+
+    $('.delete').click(function(e) {
+    e.preventDefault();
+        var id = $(this).attr(`data-id`);
+        console.log(id);
+        deletedata(id);
+    });
+
+
+    document.querySelector('#add').addEventListener('submit', function(e) {
+        var form = this;
+
+        e.preventDefault();
+
+        Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, create it!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+        form.submit();
+        }
+        })
+        });
+
+
+
+        document.querySelector('#edit').addEventListener('submit', function(e) {
+        var form = this;
+
+        e.preventDefault();
+
+        Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, create it!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+        form.submit();
+        }
+        })
+        });
+
+    
+    function deletedata(id) {
+        
+        Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+          ),window.location = "/deletedivisi/" + id;
+          }
+      })
+    }
+</script>
+
+</html>

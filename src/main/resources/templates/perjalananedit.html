@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title></title>
+</head>
+<body>
+
+    <nav th:insert="sidenav :: navadmin"></nav>
+
+        <div align="center">
+            <h1>Edit Perjalanan</h1>
+            <br />
+
+            <form th:action="@{/saveperjalanan}" th:object="${perjalanan}" method="POST" id="">
+                <table border="0" cellpadding="10">
+                    <tr>
+                        <td>Tujuan Perjalanan Dinas</td>
+                        <td><input type="text" th:field="*{perjalananTujuanDinas}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Jenis Kendaraan</td>
+                        <td><input type="text" th:field="*{perjalananKendaraan}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Kota Asal</td>
+                        <td><input type="text" th:field="*{perjalananKotaAsal}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Kota Tujuan</td>
+                        <td><input type="text" th:field="*{perjalananKotaTujuan}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Waktu Berangkat</td>
+                        <td><input type="text" th:field="*{perjalananWaktuBerangkat}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Waktu Pulang</td>
+                        <td><input type="text" th:field="*{perjalananWaktuPulang}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Tanggal Berangkat</td>
+                        <td><input type="text" th:field="*{perjalananTanggalBerangkat}" /></td>
+                    </tr>
+                     <tr>
+                        <td>Tanggal Pulang</td>
+                        <td><input type="text" th:field="*{perjalananTanggalPulang}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Total Diem</td>
+                        <td><input type="text" th:field="*{perjalananHotel}"  /></td>
+                    </tr>
+                    <tr>
+                        <td>Hotel</td>
+                        <td><input type="text" th:field="*{perjalananTotalDiem}" /></td>
+                    </tr>
+                        <td colspan="2" th:insert="button :: button.create"></td>                    
+                        </tr>
+                        
+                </table>
+            </form>
+            
+        </div>
+
+</body>
+</html>

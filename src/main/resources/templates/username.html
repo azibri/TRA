@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="resource :: sumber">
+<body>
+
+    <nav th:insert="sidenav :: navadmin"></nav>
+
+	<div align="center">
+
+    <div sec:authorize="isAuthenticated()">Authenticated as <span sec:authentication="name"></span></div>
+
+
+        <!--<span sec:authentication="name">Username</span>
+        <span>[[${#request.remoteUser}]]</span>
+        <span sec:authentication="principal.authorities">Roles</span>
+        <span th:text="${username}"></span>
+        <span>[[${#request.userPrincipal.principal.id}]]</span>-->
+
+    </div>
+
+
+
+
+</body>
+
+
+</html>

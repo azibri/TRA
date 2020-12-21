@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="resource :: sumber">
+    </head>
+    <body>
+
+        <nav th:insert="sidenav :: navmanajer"></nav>
+
+        <div align="center">
+            <br/>
+            <h1>Persetujuan</h1>
+            <br/>
+
+            <div class="col-md-8">
+                <!--            <div align="left">
+                                <a href="/addpengajuan" th:insert="button :: button.create"></a>
+                            </div>-->
+                <br/>
+                <table class="table table-hover table-bordered">
+                    <thead class='thead-light'>
+                        <tr>
+                            <th>No</th>
+                            <!--<th>Pengajuan ID</th>-->
+                            <th>Tujuan Perjalan Dinas</th>
+                            <th>Jenis Kendaraan</th>
+                            <th>Kota Asal</th>
+                            <th>Kota Tujuan</th>
+                            <th>Waktu Berangkat</th>
+                            <th>Waktu Pulang</th>
+                            <th>Tanggal Berangkat</th>
+                            <th>Tanggal Pulang</th>
+                            <th>Hotel</th>
+                            <th>Approval</th>
+                            <th>Aksi</th>  
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    <th:block th:each="pengajuan, iterStat : ${listpengajuan}">
+                        <tr th:attr="data-target = '#muncul' + ${iterStat.index}" data-toggle="collapse" class="accordion-toggle">
+
+                            <!--<tr th:attr="data-target = '#accordion'" data-toggle="collapse" class="accordion-toggle">-->
+                            <td th:text="${iterStat.count}">No</td>
+                            <!--<td th:text="${pengajuan.pengajuanId}">Pengajuan ID</td>-->
+                            <td th:text="${pengajuan.tujuandinasId.tujuandinasNama}">Tujuan Perjalan Dinas</td>
+                            <td th:text="${pengajuan.kendaraanId.KendaraanNama}">Jenis Kendaraan</td>
+                            <td th:text="${pengajuan.pengajuanKotaAsal}">Kota Asal</td>
+                            <td th:text="${pengajuan.pengajuanKotaTujuan}">Kota Tujuan</td>
+                            <td th:text="${pengajuan.pengajuanWaktuBerangkat}">Waktu Berangkat</td>
+                            <td th:text="${pengajuan.pengajuanWaktuPulang}">Waktu Pulang</td>
+                            <td th:text="${#dates.format(pengajuan.pengajuanTanggalBerangkat, 'dd MMMM yyyy')}">Tanggal Berangkat</td>
+                            <td th:text="${#dates.format(pengajuan.pengajuanTanggalPulang, 'dd MMMM yyyy')}">Tanggal Pulang</td>
+                            <td th:text="${pengajuan.pengajuanHotel}">Hotel</td>
+                            <td bgcolor="#ffff66" th:text="${pengajuan.approvalId.approvalNama}">Approval</td>
+                            <td>
+                                <!--<a th:href="@{/editkendaraan/(kendaraan_id=${kendaraan.kendaraanId})}" class="edit btn btn-warning btn-sm">Edit</a>
+
+                                <a th:href="@{'/editpengajuan/' + ${pengajuan.pengajuanId}}" class="btn btn-warning btn-sm" role="button">Edit</a>
+
+                                <a th:href="@{/update/(pengajuan_id=${pengajuan.pengajuanId})}" th:value="${pengajuan.approvalId='1'}" class="accept btn-success btn-sm">Accept</a>-->
+                                <!--<a th:href="@{/komentar/(pengajuan_id=${pengajuan.pengajuanId})}" class="komentar btn btn-warning btn-sm">Komentar</a>-->
+
+                                <a th:href="@{update/{id}?approval=1 (id=${pengajuan.pengajuanId})}"
+                                   th:classappend="${pengajuan.approvalId.approvalNama} != 'pending' ? 'disabled' : '' " 
+                                   class="btn btn-success btn-sm" role="button"
+                                   th:data-id="${pengajuan.pengajuanId}">Accept</a>
+
+                                <!--<a th:href="@{update/{id}?approval=1 (id=${pengajuan.pengajuanId})}"
+                                th:classappend="${pengajuan.approvalId.approvalNama} != 'pending' ? 'disabled' : '' " 
+                                class="komentar btn btn-success btn-sm" role="button"
+                                th:data-id="${pengajuan.pengajuanId}">Accept</a>-->
+
+
+                                <a th:href="@{update/{id}?approval=0 (id=${pengajuan.pengajuanId})}"
+                                   th:classappend="${pengajuan.approvalId.approvalNama} != 'pending' ? 'disabled' : '' " 
+                                   class="btn btn-danger btn-sm" role="button"
+                                   th:data-id="${pengajuan.pengajuanId}">Decline</a>
+
+                                <!--<input type="hidden" th:value="${pengajuan.approvalId='1'}">-->
+                                <!--<a th:href="@{/savepengajuan}" class="decline btn-danger btn-sm">Decline</a>-->
+                                <!--<a th:href="@{/editkendaraan/(kendaraan_id=${kendaraan.kendaraanId})}" class="rincian btn-warning btn-sm">Rincian</a>-->
+                                <!--                                 <a th:href="@{/editkendaraan/(kendaraan_id=${kendaraan.kendaraanId})}" class="edit btn btn-warning btn-sm">Edit</a>-->
+                                <!--                            <a th:href="@{'/editpengajuan/' + ${pengajuan.pengajuanId}}" class="btn btn-warning btn-sm" role="button">Edit</a>
+                                                            <a th:href="@{'/deletepengajuan/' + ${pengajuan.pengajuanId}}" th:data-id='${pengajuan.pengajuanId}' class="delete btn btn-danger btn-sm" role="button">Delete</a>-->
+                            </td>
+                        </tr>
+                        <tr class="collapse" th:id="'muncul' + ${iterStat.index}">
+                            <td colspan="3">Nama Karyawan</td>
+                            <td colspan="8" th:text="${pengajuan.karyawanId.karyawanNama}"></td>
+                        </tr>
+                        <tr class="collapse" th:id="'muncul' + ${iterStat.index}">
+                            <td colspan="3">Divisi</td>
+                            <td colspan="8" th:text="${pengajuan.karyawanId.divisiId.divisiNama}"></td>
+                        </tr>
+                        <tr class="collapse" th:id="'muncul' + ${iterStat.index}">
+                            <td colspan="3">Jenis Kelamin</td>
+                            <td colspan="8" th:text="${pengajuan.karyawanId.karyawanJenisKelamin}"></td>
+                        </tr>
+                        <tr class="collapse" th:id="'muncul' + ${iterStat.index}">
+                            <td colspan="3">Tanggal Lahir</td>
+                            <td colspan="8" th:text="${pengajuan.karyawanId.karyawanTanggalLahir}"></td>
+                        </tr>
+                        <tr class="collapse" th:id="'muncul' + ${iterStat.index}">
+                            <td colspan="3">Email</td> 
+                            <td colspan="8" th:text="${pengajuan.karyawanId.karyawanEmail}"></td>
+                        </tr>
+                        <tr class="collapse" th:id="'muncul' + ${iterStat.index}">
+                            <td colspan="3">Alamat</td>
+                            <td colspan="8" th:text="${pengajuan.karyawanId.karyawanAlamat}"></td>
+                        </tr>
+                        </tr>
+                    </th:block>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+        <!--Modal Komentar-->
+        <div class="myForm">
+            <!--Modal-->
+            <div id="modaledit" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!--konten Modal-->
+                    <div class="modal-content">
+
+                        <!--Modal heading-->
+                        <div class="modal-header">
+
+
+                            <h5 class="modal-title">Komentar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
+                        </div>
+
+                        <!--modal body-->
+                        <div class="modal-body">
+
+
+                            <!--<form th:action="@{/savekendaraan}" method="put" id="edit">-->
+                            <form th:action="@{/savepengajuan}" method="post" id="rincian">
+                                <input type="text" id="id" name="pengajuanId" readonly="readonly">
+                        
+                                <input type="text" id="karyawan"  name="karyawanId"/>
+
+                                <input type="text" id="tujuandinas" name="tujuandinasId"/>
+
+                                <input type="text" id="kendaraan" name="kendaraanId"/>
+
+
+                                <input type="text" id="kotaasal" name="pengajuanKotaAsal"/>
+
+                                <input type="text" id="kotatujuan" name="pengajuanKotaTujuan"/>
+
+                                <input type="text" id="waktuberangkat" name="pengajuanWaktuBerangkat"/>
+
+                                <input type="text" id="waktupulang" name="pengajuanWaktuPulang"/>
+
+                                <input type="text" id="tanggalberangkat" name="pengajuanTanggalBerangkat"/>
+
+                                <input type="text" id="tanggalpulang" name="pengajuanTanggalPulang"/>
+
+                                <input type="text" id="hotel" name="pengajuanHotel"/>
+
+                                <input type="text" id="deleted" name="deleted" /></td>
+
+                                <div class="form-group">
+                                    Komentar
+                                    <textarea class="form-control" id="komentar" name="pengajuanKomentar"></textarea>
+                                </div>
+                                
+
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <!--<button href="/addkendaraan"  type="submit" class="btn btn-primary">Create</button>-->
+                            <button type="submit" class="btn btn-primary">Create</button>
+
+                        </div>
+                        </form>
+
+                    </div>    
+                </div>
+            </div>
+        </div>
+
+
+    </body>
+
+    <script type="text/javascript">
+
+        $('document').ready(function() {
+        $('.table .komentar ').on('click', function(event) {
+
+        event.preventDefault();
+
+        var href = $(this).attr('href');
+
+        $.get(href, function(pengajuan, status){
+        $('#id').val(pengajuan.pengajuanId);
+        $('#karyawan').val(pengajuan.karyawanId);
+        $('#tujuandinas').val(pengajuan.tujuandinasId);
+        $('#kendaraan').val(pengajuan.kendaraanId);
+        $('#approval').val(pengajuan.approvalId);
+        $('#kotaasal').val(pengajuan.pengajuanKotaAsal);
+        $('#kotatujuan').val(pengajuan.pengajuanKotaTujuan);
+        $('#waktuberangkat').val(pengajuan.pengajuanWaktuBerangkat);
+        $('#waktupulang').val(pengajuan.pengajuanWaktuPulang);
+        $('#tanggalberangkat').val(pengajuan.pengajuanTanggalBerangkat);
+        $('#tanggalpulang').val(pengajuan.pengajuanTanggalPulang);
+        $('#hotel').val(pengajuan.pengajuanHotel);
+        $('#deleted').val(pengajuan.deleted);
+        $('#komentar').val(pengajuan.pengajuanKomentar);
+        });
+
+        $('#modaledit').modal();
+
+        });
+        });
+
+
+
+
+        document.querySelector('#rincian').addEventListener('submit', function(e) {
+        var form = this;
+
+        e.preventDefault();
+
+        Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, create it!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+        form.submit();
+        }
+        })
+        });
+
+    </script>
+
+</html>

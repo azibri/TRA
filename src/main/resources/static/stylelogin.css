@@ -1,0 +1,41 @@
+body {
+	background: #42a5f5;
+}
+
+h3 {
+    letter-spacing: 4px;
+    padding-bottom: 23px;
+    padding-top: 13px;
+    text-align: center;
+}
+
+.input-group {
+	margin-bottom: 20px;
+}
+
+.login-form {
+	height: 410px;
+    margin: 6rem auto 8.1rem auto;
+    width: 329px;
+}
+
+.login-form form{
+	margin-bottom: 15px;
+    background: #f7f7f7;
+    padding: 30px;
+    align-items: left;
+    display: flex;
+    flex-direction: column;
+}
+
+
+#masuk {
+	width: 153px;
+    height: 42.3px;
+    border: none;
+    border-radius: 10px;
+    background-color:#42a5f5; 
+    margin: 0 auto;
+    margin-top: 20px;
+    
+}

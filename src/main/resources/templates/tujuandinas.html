@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="resource :: sumber">
+<body>
+
+<nav th:insert="sidenav :: navadmin"></nav>
+    
+	<div align="center">
+        <br/>
+        <h1>Tujuan Dinas</h1>
+        <br/>
+
+        <div class="col-md-8">
+            <div align="left">
+                <a data-toggle="modal" data-target="#modalcreate" th:insert = "button :: button.create"></a>
+            </div>
+            <br/>
+            <table class="table table-hover table-bordered">
+                <thead class='thead-light'>
+                    <tr>
+                        <th>No</th>
+                        <!--<th>Dinas ID</th>-->
+                        <th>Nama Tujuan Dinas</th>
+                        <th>Diem</th>
+                        <th>Keterangan</th>
+                        <th>Aksi</th>  
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr th:each="tujuandinas, iterStat : ${listtujuandinas}">
+                        <td th:text="${iterStat.count}">No</td>
+                        <!--<td th:text="${tujuandinas.tujuandinasId}">Dinas ID</td>-->
+                        <td th:text="${tujuandinas.tujuandinasNama}">Nama Tujuan Dinas</td>
+                        <td th:text="${tujuandinas.tujuandinasDiem}">Diem</td>
+                        <td th:text="${tujuandinas.tujuandinasKeterangan}">Keterangan</td>
+                        <td>
+                            <a th:href="@{/edittujuandinas/(tujuandinas_id=${tujuandinas.tujuandinasId})}" class="edit btn btn-warning btn-sm">Edit</a>
+                            <!--<a href="#modaledit" class="edit" data-toggle="modal" >Edit</a>-->
+                            <!--<a th:href="@{'/edittujuandinas/' + ${tujuandinas.tujuandinasId}}" class="btn btn-warning btn-sm" role="button">Edit</a>-->
+                            <a th:href="@{'/deletetujuandinas/' + ${tujuandinas.tujuandinasId}}" class="delete btn btn-danger btn-sm" th:data-id='${tujuandinas.tujuandinasId}' role="button">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+    <!--Modal Create-->
+        <div class="myForm">
+            <!--Modal-->
+            <div id="modalcreate" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!--konten Modal-->
+                    <div class="modal-content">
+
+                        <!--Modal heading-->
+                        <div class="modal-header">
+
+
+                            <h5 class="modal-title">Create New Tujuan Dinas</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
+                        </div>
+
+                        <!--modal body-->
+                        <div class="modal-body">
+
+
+                            <form th:action="@{/addtujuandinas}" th:object="${tujuandinas}" method="POST" id="add">
+                                <!--<input type="hidden" id="id" name="id" value="" th:field="*{tujuandinasId}">-->
+
+                                <div class="form-group">
+                                    Nama Tujuan Dinas
+                                    <input th:field="*{tujuandinasNama}" maxlength="50" type="text" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    Diem
+                                    <input th:field="*{tujuandinasDiem}" maxlength="20" min="1" type="number" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    Keterangan
+                                    <textarea th:field="*{tujuandinasKeterangan}" maxlength="100" class="form-control"></textarea>
+                                </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <!--<button href="/addkendaraan"  type="submit" class="btn btn-primary">Create</button>-->
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                        </form>
+
+                    </div>    
+                </div>
+            </div>
+        </div>
+
+
+
+        <!--Modal Edit-->
+        <div class="myForm">
+            <!--Modal-->
+            <div id="modaledit" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!--konten Modal-->
+                    <div class="modal-content">
+
+                        <!--Modal heading-->
+                        <div class="modal-header">
+
+
+                            <h5 class="modal-title">Edit Tujuan Dinas</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
+                        </div>
+
+                        <!--modal body-->
+                        <div class="modal-body">
+
+
+                            <form th:action="@{/savetujuandinas}" method="post" id="edit">
+                                <input type="hidden" id="id" name="tujuandinasId" readonly="readonly">
+
+                                <div class="form-group">
+                                    Nama Tujuan Dinas
+                                    <input name="tujuandinasNama" maxlength="50" id="nama" type="text" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    Diem
+                                    <input name="tujuandinasDiem" id="diem" type="number" maxlength="20" min="1" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    Keterangan
+                                    <textarea class="form-control" maxlength="100" name="tujuandinasKeterangan" id="keterangan"></textarea>
+                                </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <!--<button href="/addkendaraan"  type="submit" class="btn btn-primary">Create</button>-->
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                        </form>
+
+                    </div>    
+                </div>
+            </div>
+        </div>
+
+
+
+</body>
+
+<script type="text/javascript">
+
+    $('document').ready(function() {
+            $('.table .edit').on('click', function(event) {
+
+                event.preventDefault();
+
+                var href = $(this).attr('href');
+
+                $.get(href, function(tujuandinas, status){
+                $('#id').val(tujuandinas.tujuandinasId);
+                $('#nama').val(tujuandinas.tujuandinasNama);
+                $('#diem').val(tujuandinas.tujuandinasDiem);
+                $('#keterangan').val(tujuandinas.tujuandinasKeterangan);
+                });
+
+                $('#modaledit').modal();
+
+            });
+        });
+
+
+    document.querySelector('#add').addEventListener('submit', function(e) {
+        var form = this;
+
+        e.preventDefault();
+
+        Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, create it!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+        form.submit();
+        }
+        })
+        });
+
+
+
+        document.querySelector('#edit').addEventListener('submit', function(e) {
+        var form = this;
+
+        e.preventDefault();
+
+        Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, create it!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+        form.submit();
+        }
+        })
+        });
+
+
+        $('.delete').click(function(e) {
+        e.preventDefault();
+        var id = $(this).attr(`data-id`);
+        console.log(id);
+        deletedata(id);
+        });
+
+
+        function deletedata(id) {
+
+        Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+        Swal.fire(
+        'Deleted!',
+        'Your file has been deleted.',
+        'success'
+        ),window.location = "/deletetujuandinas/" + id;
+        }
+        })
+        }
+</script>
+
+</html>
