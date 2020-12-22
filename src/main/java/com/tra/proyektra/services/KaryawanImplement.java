@@ -65,5 +65,10 @@ public class KaryawanImplement implements KaryawanInterface {
     public Karyawan carinama(Integer pengajuanid_2) {
         return repoKaryawan.carinama(pengajuanid_2);
     }
+
+    @Override
+    public long karyawan() {
+        return repoKaryawan.count();
+    }
     
 }

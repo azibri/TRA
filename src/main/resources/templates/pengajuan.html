@@ -1,95 +1,100 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="resource :: sumber">
-</head>
-<body>
+    <head th:replace="resource :: sumber">
+    </head>
+    <body>
 
-    <nav th:insert="sidenav :: navuser"></nav>
-    
-	<div align="center">
-        <br/>
-        <h1>Pengajuan</h1>
-        <br/>
+        <nav th:insert="sidenav :: navuser"></nav>
+        <div id="wrapper">
+            <ul th:replace="sidenav :: sidenavuser"></ul>
+            <div id="content-wrapper">
 
-        <div class="col-md-8">
-            <div align="left">
-                <a href="/addpengajuan" th:insert="button :: button.create"></a>
+                <div class="container-fluid">
+
+                    <!-- DataTables Example -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            Pengajuan</div>
+                        <div class="card-body">
+                            <div align="left">
+                                <a href="/addpengajuan" th:insert="button :: button.create"></a>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <!--<th>Pengajuan ID</th>-->
+                                            <th>Nama</th>
+                                            <th>Tujuan Perjalan Dinas</th>
+                                            <th>Jenis Kendaraan</th>
+                                            <th>Kota Asal</th>
+                                            <th>Kota Tujuan</th>
+                                            <th>Waktu Berangkat</th>
+                                            <th>Waktu Pulang</th>
+                                            <th>Tanggal Berangkat</th>
+                                            <th>Tanggal Pulang</th>
+                                            <th>Hotel</th>
+                                            <th>Status</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="pengajuan, iterStat : ${listpengajuan}">
+                                            <td th:text="${iterStat.count}">No</td>
+                                            <!--<td th:text="${pengajuan.pengajuanId}">Pengajuan ID</td>-->
+                                            <td th:text="${pengajuan.karyawanId.karyawanNama}">nama</td>
+                                            <td th:text="${pengajuan.tujuandinasId.tujuandinasNama}">Tujuan Perjalan Dinas</td>
+                                            <td th:text="${pengajuan.kendaraanId.KendaraanNama}">Jenis Kendaraan</td>
+                                            <td th:text="${pengajuan.pengajuanKotaAsal}">Kota Asal</td>
+                                            <td th:text="${pengajuan.pengajuanKotaTujuan}">Kota Tujuan</td>
+                                            <td th:text="${pengajuan.pengajuanWaktuBerangkat}">Waktu Berangkat</td>
+                                            <td th:text="${pengajuan.pengajuanWaktuPulang}">Waktu Pulang</td>
+                                            <td th:text="${#dates.format(pengajuan.pengajuanTanggalBerangkat, 'dd MMMM yyyy')}">Tanggal Berangkat</td>
+                                            <td th:text="${#dates.format(pengajuan.pengajuanTanggalPulang, 'dd MMMM yyyy')}">Tanggal Pulang</td>
+                                            <td th:text="${pengajuan.pengajuanHotel}">Hotel</td>
+                                            <td th:text="${pengajuan.approvalId.approvalNama}">Status</td>
+                                            <td>
+                                                <a th:href="@{'/editpengajuan/' + ${pengajuan.pengajuanId}}" 
+                                                   th:classappend="${pengajuan.approvalId.approvalNama} != 'pending' ? 'disabled' : '' "
+                                                   class="btn btn-warning btn-sm edit" role="button">Edit</a>
+                                                <a th:href="@{cancelpengajuan/{id}?approval=2 (id=${pengajuan.pengajuanId})}"
+                                                   th:classappend="${pengajuan.approvalId.approvalNama} != 'pending' ? 'disabled' : '' " 
+                                                   th:data-id='${pengajuan.pengajuanId}'
+                                                   class="delete btn btn-danger btn-sm" role="button">Cancel</a>
+
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-            <br/>
-            <table class="table table-hover table-bordered">
-                <thead class='thead-light'>
-                    <tr>
-                        <th>No</th>
-                        <!--<th>Pengajuan ID</th>-->
-                        <th>Nama</th>
-                        <th>Tujuan Perjalan Dinas</th>
-                        <th>Jenis Kendaraan</th>
-                        <th>Kota Asal</th>
-                        <th>Kota Tujuan</th>
-                        <th>Waktu Berangkat</th>
-                        <th>Waktu Pulang</th>
-                        <th>Tanggal Berangkat</th>
-                        <th>Tanggal Pulang</th>
-                        <th>Hotel</th>
-                        <th>Status</th>
-                        <th>Aksi</th>  
-                    </tr>
-                </thead>
-                <tbody>
-
-
-                    <tr th:each="pengajuan, iterStat : ${listpengajuan}">
-                        <td th:text="${iterStat.count}">No</td>
-                        <!--<td th:text="${pengajuan.pengajuanId}">Pengajuan ID</td>-->
-                        <td th:text="${pengajuan.karyawanId.karyawanNama}">nama</td>
-                        <td th:text="${pengajuan.tujuandinasId.tujuandinasNama}">Tujuan Perjalan Dinas</td>
-                        <td th:text="${pengajuan.kendaraanId.KendaraanNama}">Jenis Kendaraan</td>
-                        <td th:text="${pengajuan.pengajuanKotaAsal}">Kota Asal</td>
-                        <td th:text="${pengajuan.pengajuanKotaTujuan}">Kota Tujuan</td>
-                        <td th:text="${pengajuan.pengajuanWaktuBerangkat}">Waktu Berangkat</td>
-                        <td th:text="${pengajuan.pengajuanWaktuPulang}">Waktu Pulang</td>
-                        <td th:text="${#dates.format(pengajuan.pengajuanTanggalBerangkat, 'dd MMMM yyyy')}">Tanggal Berangkat</td>
-                        <td th:text="${#dates.format(pengajuan.pengajuanTanggalPulang, 'dd MMMM yyyy')}">Tanggal Pulang</td>
-                        <td th:text="${pengajuan.pengajuanHotel}">Hotel</td>
-                        <td th:text="${pengajuan.approvalId.approvalNama}">Status</td>
-                        <td>
-                            <a th:href="@{'/editpengajuan/' + ${pengajuan.pengajuanId}}" 
-                            th:classappend="${pengajuan.approvalId.approvalNama} != 'pending' ? 'disabled' : '' "
-                            class="btn btn-warning btn-sm edit" role="button">Edit</a>
-                            <a th:href="@{cancelpengajuan/{id}?approval=2 (id=${pengajuan.pengajuanId})}"
-                            th:classappend="${pengajuan.approvalId.approvalNama} != 'pending' ? 'disabled' : '' " 
-                            th:data-id='${pengajuan.pengajuanId}'
-                            class="delete btn btn-danger btn-sm" role="button">Cancel</a>
-
-
-
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
 
-    </div>
 
+    </body>
 
-</body>
+    <script type="text/javascript">
 
-<script type="text/javascript">
-
-    $(document).ready(function() {
+        $(document).ready(function() {
         $(".edit", this).attr('disabled', 'disabled');
-    });
+        });
 
 
-    $('.delete').click(function(e) {
-    e.preventDefault();
+        $('.delete').click(function(e) {
+        e.preventDefault();
         var id = $(this).attr(`data-id`);
         console.log(id);
         deletedata(id);
-    });
-    
-    function deletedata(id) {
-        
+        });
+
+        function deletedata(id) {
+
         Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -98,17 +103,17 @@
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, cancel it!'
-      }).then((result) => {
+        }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire(
-          'Deleted!',
-          'Your file has been cancel.',
-          'success'
-          ),window.location = "/cancelpengajuan/" + id +"?approval=2";
-          }
-      })
-    }
-    
-</script>
+        Swal.fire(
+        'Deleted!',
+        'Your file has been cancel.',
+        'success'
+        ),window.location = "/cancelpengajuan/" + id +"?approval=2";
+        }
+        })
+        }
+
+    </script>
 
 </html>

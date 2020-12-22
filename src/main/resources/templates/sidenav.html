@@ -4,65 +4,163 @@
     </head>
     <body>
 
-        <nav th:fragment="navadmin">
-            <ul>
-                <li>
-                    <a href="/indexadmin">Dashboard</a>
-                </li>
-                <li>
-                    <a href="/karyawan">Karyawan</a>
-                </li>
-                <li>
-                    <a href="/listpengajuan">Pengajuan Ijin Dinas</a>
-                </li>
-                <li>
-                    <a href="/perjalanan">Perjalanan</a>
-                </li>
-                <li>
-                    <a href="/tujuandinas">Tujuan Dinas</a>
-                </li>
-                <li>
-                    <a href="/divisi">Divisi</a>
-                </li>
-                <li>
-                    <a href="/kendaraan">Kendaraan</a>
-                </li>
+        <!--Admin-->
+        <nav class="navbar navbar-expand navbar-dark bg-dark static-top" th:fragment="navadmin">
+            <a class="navbar-brand mr-1" href="#">HRD</a>
+
+            <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Logout -->
+            <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
                 <form class="form-inline" th:action="@{/logout}" method="post">
                     <input class="btn btn-danger form-control my-2 my-sm-0" type="submit" value="Logout"/>
                 </form>
-            </ul>
-
+            </div>
         </nav>
 
-        <nav th:fragment="navuser">
-            <ul>
-                <li>
-                    <a href="/indexuser">Dashboard</a>
-                </li>
-                <li>
-                    <a href="/pengajuan">Pengajuan</a>
-                </li>
-                    <form class="form-inline" th:action="@{/logout}" method="post">
-                        <input class="btn btn-danger form-control my-2 my-sm-0" type="submit" value="Logout"/>
-                    </form>
-            </ul>
+        <!-- Sidebar Admin -->
+        <ul class="sidebar navbar-nav" th:fragment="sidenavadmin">
+            <li class="nav-item">
+                <a class="nav-link" href="/indexadmin">
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/karyawan">
+                    <span>Karyawan</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/listpengajuan">
+                    <span>Pengajuan Ijin Dinas</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/perjalanan">
+                    <span>Perjalanan</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tujuandinas">
+                    <span>Tujuan Dinas</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/divisi">
+                    <span>Divisi</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/kendaraan">
+                    <span>Kendaraan</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/report">
+                    <span>Report</span>
+                </a>
+            </li>
+        </ul>
 
+
+
+        <!--User-->
+        <nav class="navbar navbar-expand navbar-dark bg-dark static-top" th:fragment="navuser">
+            <a class="navbar-brand mr-1" href="#">Karyawan</a>
+
+            <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <!-- Logout -->
+            <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                <form class="form-inline" th:action="@{/logout}" method="post">
+                    <input class="btn btn-danger form-control my-2 my-sm-0" type="submit" value="Logout"/>
+                </form>
+            </div>
+            
         </nav>
 
-        <nav th:fragment="navmanajer">
-            <ul>
-                <li>
-                    <a href="/indexmanajer">Dashboard</a>
-                </li>
-                <li>
-                    <a href="/persetujuan">Pengajuan</a>
-                </li>
-                    <form class="form-inline" th:action="@{/logout}" method="post">
-                        <input class="btn btn-danger form-control my-2 my-sm-0" type="submit" value="Logout"/>
-                    </form>
-            </ul>
+        <!-- Sidebar User -->
+        <ul class="sidebar navbar-nav" th:fragment="sidenavuser">
+            <li class="nav-item">
+                <a class="nav-link" href="/indexuser">
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/pengajuan">
+                    <span>Pengajuan</span>
+                </a>
+            </li>
+        </ul>
 
+
+        <!--Manajer-->
+        <nav class="navbar navbar-expand navbar-dark bg-dark static-top" th:fragment="navmanajer">
+            <a class="navbar-brand mr-1" href="#">Manajer</a>
+
+            <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <!-- Logout -->
+            <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                <form class="form-inline" th:action="@{/logout}" method="post">
+                    <input class="btn btn-danger form-control my-2 my-sm-0" type="submit" value="Logout"/>
+                </form>
+            </div>
+            
         </nav>
+
+        <!-- Sidebar User -->
+        <ul class="sidebar navbar-nav" th:fragment="sidenavmanajer">
+            <li class="nav-item">
+                <a class="nav-link" href="/indexmanajer">
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/persetujuan">
+                    <span>Pengajuan</span>
+                </a>
+            </li>
+        </ul>
+
+
+        <!--        <nav th:fragment="navuser">
+                    <ul>
+                        <li>
+                            <a href="/indexuser">Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="/pengajuan">Pengajuan</a>
+                        </li>
+                        <form class="form-inline" th:action="@{/logout}" method="post">
+                            <input class="btn btn-danger form-control my-2 my-sm-0" type="submit" value="Logout"/>
+                        </form>
+                    </ul>
+        
+                </nav>
+        
+        
+        
+                <nav th:fragment="navmanajer">
+                    <ul>
+                        <li>
+                            <a href="/indexmanajer">Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="/persetujuan">Pengajuan</a>
+                        </li>
+                        <form class="form-inline" th:action="@{/logout}" method="post">
+                            <input class="btn btn-danger form-control my-2 my-sm-0" type="submit" value="Logout"/>
+                        </form>
+                    </ul>
+        
+                </nav>-->
 
     </body>
 </html>

@@ -28,4 +28,6 @@ public interface KaryawanInterface {
     
     public Karyawan carinama(Integer pengajuanid_2);
     
+    long karyawan();
+    
 }

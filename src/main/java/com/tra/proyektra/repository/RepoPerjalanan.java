@@ -17,8 +17,9 @@ import org.springframework.data.repository.CrudRepository;
 public interface RepoPerjalanan extends CrudRepository<Perjalanan, Integer> {
 
     
-    public void save(Pengajuan z);
-
+    @Query(value = "SELECT SUM(perjalanan_tanggal_pulang - perjalanan_tanggal_berangkat)/COUNT(perjalanan_id) "
+            + "FROM perjalanan", nativeQuery = true)
+    long rerata ();
 
     
 }

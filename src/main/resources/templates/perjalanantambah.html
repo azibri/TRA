@@ -108,7 +108,18 @@
     </body>
 
     <script type="text/javascript">
+        
+        $("#tanggalpulang").change(function () {
+        var tanggalberangkat = document.getElementById("tanggalberangkat").value;
+        var tanggalpulang = document.getElementById("tanggalpulang").value;
 
+        if (Date.parse(tanggalpulang) <= Date.parse(tanggalberangkat)) {
+        alert("Tanggal Berangkat tidak boleh kurang dari Tanggal Pulang");
+        document.getElementById("tanggalpulang").value = "";
+        }
+        });
+        
+        
         $('#event_time').datetimepicker({
         /*"allowInputToggle": true,
         "showClose": true,

@@ -1,54 +1,61 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="resource :: sumber">
-<body>
+    <head th:replace="resource :: sumber">
+    <body>
 
-<nav th:insert="sidenav :: navadmin"></nav>
-    
-	<div align="center">
-        <br/>
-        <h1>Tujuan Dinas</h1>
-        <br/>
+        <nav th:insert="sidenav :: navadmin"></nav>
+        <div id="wrapper">
+            <ul th:replace="sidenav :: sidenavadmin"></ul>
+            <div id="content-wrapper">
 
-        <div class="col-md-8">
-            <div align="left">
-                <a data-toggle="modal" data-target="#modalcreate" th:insert = "button :: button.create"></a>
+                <div class="container-fluid">
+
+                    <!-- DataTables Example -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            Tujuan Dinas</div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <div align="left">
+                                        <a data-toggle="modal" data-target="#modalcreate" th:insert = "button :: button.create"></a>
+                                    </div>
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <!--<th>Dinas ID</th>-->
+                                            <th>Nama Tujuan Dinas</th>
+                                            <th>Diem</th>
+                                            <th>Keterangan</th>
+                                            <th>Aksi</th>  
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="tujuandinas, iterStat : ${listtujuandinas}">
+                                            <td th:text="${iterStat.count}">No</td>
+                                            <!--<td th:text="${tujuandinas.tujuandinasId}">Dinas ID</td>-->
+                                            <td th:text="${tujuandinas.tujuandinasNama}">Nama Tujuan Dinas</td>
+                                            <td th:text="${tujuandinas.tujuandinasDiem}">Diem</td>
+                                            <td th:text="${tujuandinas.tujuandinasKeterangan}">Keterangan</td>
+                                            <td>
+                                                <a th:href="@{/edittujuandinas/(tujuandinas_id=${tujuandinas.tujuandinasId})}" class="edit btn btn-warning btn-sm">Edit</a>
+                                                <!--<a href="#modaledit" class="edit" data-toggle="modal" >Edit</a>-->
+                                                <!--<a th:href="@{'/edittujuandinas/' + ${tujuandinas.tujuandinasId}}" class="btn btn-warning btn-sm" role="button">Edit</a>-->
+                                                <a th:href="@{'/deletetujuandinas/' + ${tujuandinas.tujuandinasId}}" class="delete btn btn-danger btn-sm" th:data-id='${tujuandinas.tujuandinasId}' role="button">Delete</a>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-            <br/>
-            <table class="table table-hover table-bordered">
-                <thead class='thead-light'>
-                    <tr>
-                        <th>No</th>
-                        <!--<th>Dinas ID</th>-->
-                        <th>Nama Tujuan Dinas</th>
-                        <th>Diem</th>
-                        <th>Keterangan</th>
-                        <th>Aksi</th>  
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                    <tr th:each="tujuandinas, iterStat : ${listtujuandinas}">
-                        <td th:text="${iterStat.count}">No</td>
-                        <!--<td th:text="${tujuandinas.tujuandinasId}">Dinas ID</td>-->
-                        <td th:text="${tujuandinas.tujuandinasNama}">Nama Tujuan Dinas</td>
-                        <td th:text="${tujuandinas.tujuandinasDiem}">Diem</td>
-                        <td th:text="${tujuandinas.tujuandinasKeterangan}">Keterangan</td>
-                        <td>
-                            <a th:href="@{/edittujuandinas/(tujuandinas_id=${tujuandinas.tujuandinasId})}" class="edit btn btn-warning btn-sm">Edit</a>
-                            <!--<a href="#modaledit" class="edit" data-toggle="modal" >Edit</a>-->
-                            <!--<a th:href="@{'/edittujuandinas/' + ${tujuandinas.tujuandinasId}}" class="btn btn-warning btn-sm" role="button">Edit</a>-->
-                            <a th:href="@{'/deletetujuandinas/' + ${tujuandinas.tujuandinasId}}" class="delete btn btn-danger btn-sm" th:data-id='${tujuandinas.tujuandinasId}' role="button">Delete</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
 
-    </div>
-
-
-    <!--Modal Create-->
+        <!--Modal Create-->
         <div class="myForm">
             <!--Modal-->
             <div id="modalcreate" class="modal fade" role="dialog">
@@ -156,31 +163,31 @@
 
 
 
-</body>
+    </body>
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
-    $('document').ready(function() {
-            $('.table .edit').on('click', function(event) {
+        $('document').ready(function() {
+        $('.table .edit').on('click', function(event) {
 
-                event.preventDefault();
+        event.preventDefault();
 
-                var href = $(this).attr('href');
+        var href = $(this).attr('href');
 
-                $.get(href, function(tujuandinas, status){
-                $('#id').val(tujuandinas.tujuandinasId);
-                $('#nama').val(tujuandinas.tujuandinasNama);
-                $('#diem').val(tujuandinas.tujuandinasDiem);
-                $('#keterangan').val(tujuandinas.tujuandinasKeterangan);
-                });
+        $.get(href, function(tujuandinas, status){
+        $('#id').val(tujuandinas.tujuandinasId);
+        $('#nama').val(tujuandinas.tujuandinasNama);
+        $('#diem').val(tujuandinas.tujuandinasDiem);
+        $('#keterangan').val(tujuandinas.tujuandinasKeterangan);
+        });
 
-                $('#modaledit').modal();
+        $('#modaledit').modal();
 
-            });
+        });
         });
 
 
-    document.querySelector('#add').addEventListener('submit', function(e) {
+        document.querySelector('#add').addEventListener('submit', function(e) {
         var form = this;
 
         e.preventDefault();
@@ -251,6 +258,6 @@
         }
         })
         }
-</script>
+    </script>
 
 </html>

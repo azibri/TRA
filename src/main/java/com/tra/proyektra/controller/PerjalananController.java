@@ -5,17 +5,20 @@
  */
 package com.tra.proyektra.controller;
 
-import com.tra.proyektra.entities.Pengajuan;
+import com.lowagie.text.DocumentException;
 import com.tra.proyektra.entities.Perjalanan;
+import com.tra.proyektra.report.PerjalananPdfExporter;
 import com.tra.proyektra.services.EmailService;
 import com.tra.proyektra.services.KaryawanInterface;
 import com.tra.proyektra.services.KendaraanInterface;
-import com.tra.proyektra.services.PengajuanImplement;
 import com.tra.proyektra.services.PengajuanInterface;
 import com.tra.proyektra.services.PerjalananImplement;
 import com.tra.proyektra.services.PerjalananInterface;
+import com.tra.proyektra.services.ReportService;
 import com.tra.proyektra.services.TujuandinasInterface;
+import java.io.IOException;
 import java.sql.Time;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -25,7 +28,12 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponseWrapper;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,6 +70,10 @@ public class PerjalananController {
 
     @Autowired
     private EmailService emailService;
+    
+    @Autowired
+    ReportService reportService;
+    
 
     @RequestMapping(value = "/perjalanan")
     public String allperjalanan(Model model) {
@@ -326,5 +338,34 @@ public class PerjalananController {
         emailService.notif(kirimemail, subject, from, tulisan);
         return "redirect:/perjalanan";
     }
+    
+//    @RequestMapping(value = "/report", method = RequestMethod.GET)
+//    public String report(Model model, HttpServletResponse httpServletResponse) {
+//        List<Perjalanan> perjalanan = perjalananInterface.findAllperjalanan();
+//        JRDataSource dataSource=new JRBeanCollectionDataSource(perjalanan);
+//        
+//        model.addAttribute("dataSource", dataSource);
+//        
+//        return "pdfreport";
+//    }
+    
+    @RequestMapping(value = "/report", method = RequestMethod.GET)
+    public void exportToPdf(HttpServletResponse httpServletResponse) throws DocumentException, IOException{
+        httpServletResponse.setContentType("application/pdf");
+        
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+        
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=report_" + currentDateTime + ".pdf";
+        
+        httpServletResponse.setHeader(headerKey, headerValue);
+        
+        List<Perjalanan> listperjalanan = reportService.listAll();
+        
+        PerjalananPdfExporter exporter = new PerjalananPdfExporter(listperjalanan);
+        exporter.export(httpServletResponse);
+    }
+    
 
 }

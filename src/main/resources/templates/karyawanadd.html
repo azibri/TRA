@@ -1,95 +1,106 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-xmlns:th="http://www.thymeleaf.org">
-<head th:replace="resource :: sumber">
-	
-</head>
-<body>
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="resource :: sumber">
 
-   <nav th:insert="sidenav :: navadmin"></nav>
+    </head>
+    <body>
 
-	<div align="center">
-            <h1>Create New Karyawan</h1>
-            <br />
-            
-            <form th:action="@{/savekaryawan}" th:object="${karyawan}" method="POST" id="add">
-            	<table border="0" cellpadding="10">
-                    <tr>
-                        <td>Pilih Divisi</td>
-                        <td>
-                            <select class="form-control" th:field="${karyawan.divisiId}">
-                                <option value="0">select Divisi</option>
-                                <option th:each="divisi : ${listdivisi}" th:value="${divisi.divisiId}" th:text="${divisi.divisiNama}"></option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Nama Karyawan</td>
-                        <td><input type="text" th:field="*{karyawanNama}" maxlength="50" /></td>
-                    </tr>
-                    <tr>
-                        <td>Jenis Kelamin</td>
-                        <td>
-                        <input type="radio" th:field="*{karyawanJenisKelamin}" value="Laki-laki"> Laki-laki</input>&nbsp&nbsp
-                        <input type="radio" th:field="*{karyawanJenisKelamin}" value="Perempuan"> Perempuan</input>
-                        </td>
-                        <!--<td><input type="text" th:field="*{karyawanJenisKelamin}" /></td>
-                        <td>
-                            <ul>
-                            <li th:each="karyawan : ${listkaryawan}">
-                                <input type="radio" th:field="*{karyawanJenisKelamin}" th:value="{karyawan}" />
-                                <label th:for="${karyawan.karyawanJenisKelamin}" th:text="${listkaryawan}"></label>
-                            </li>
-                        </ul>
-                        </td>-->
-                    </tr>
-                    <tr>
-                        <td>Tanggal Lahir</td>
-                        <td>
-                        <div class="input-group date">
-                            <input type="text" id="tanggallahir" th:field="*{karyawanTanggalLahir}" >
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                            </div>
-                        </div>
-                            <!--<div class="date" id="datetimepicker1" >
-                                <input type="text" class="datetimepicker-input" data-target="#datetimepicker1" th:field="*{karyawanTanggalLahir}" id="date"/>
-                                <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker"></div>
-                            </div>-->
-                        </td>
-                        <!--<td>Tanggal Lahir</td>
-                        <td><input type="text" th:field="*{karyawanTanggalLahir}" /></td>-->
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td><input type="email" th:field="*{karyawanEmail}" maxlength="50" /></td>
-                    </tr>
-                    <tr>
-                        <td>Alamat</td>
-                        <td><input type="text" th:field="*{karyawanAlamat}" maxlength="50" /></td>
-                    </tr>
-                    <tr>
-                        <td>Role</td>
-                        <td><input type="text" th:field="*{karyawanRole}" maxlength="20" /></td>
-                    </tr>
-                        <td colspan="2" th:insert="button :: button.save"></td>
-                	</tr>
-                	
-                </table>
-            </form>
-            
+        <nav th:insert="sidenav :: navadmin"></nav>
+        <div id="wrapper">
+            <ul th:replace="sidenav :: sidenavadmin"></ul>
+            <div id="content-wrapper">
+
+                <div class="container-fluid">
+
+                    <div align="center">
+                        <h1>Create New Karyawan</h1>
+                        <br />
+
+                        <form th:action="@{/savekaryawan}" th:object="${karyawan}" method="POST" id="add">
+                            <table border="0" cellpadding="10">
+                                <tr>
+                                    <td>Pilih Divisi</td>
+                                        <td>
+                                        <select class="form-control" th:field="${karyawan.divisiId}">
+                                            <option value="0">select Divisi</option>
+                                            <option th:each="divisi : ${listdivisi}" th:value="${divisi.divisiId}" th:text="${divisi.divisiNama}"></option>
+                                        </select>
+                                        </td>
+                                </tr>
+                                <tr>
+                                    <td>Nama Karyawan</td>
+                                    <td><input type="text" th:field="*{karyawanNama}" maxlength="50" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Jenis Kelamin</td>
+                                    <td>
+                                        <input type="radio" th:field="*{karyawanJenisKelamin}" value="Laki-laki"> Laki-laki</input>&nbsp&nbsp
+                                        <input type="radio" th:field="*{karyawanJenisKelamin}" value="Perempuan"> Perempuan</input>
+                                    </td>
+                                    <!--<td><input type="text" th:field="*{karyawanJenisKelamin}" /></td>
+                                    <td>
+                                        <ul>
+                                        <li th:each="karyawan : ${listkaryawan}">
+                                            <input type="radio" th:field="*{karyawanJenisKelamin}" th:value="{karyawan}" />
+                                            <label th:for="${karyawan.karyawanJenisKelamin}" th:text="${listkaryawan}"></label>
+                                        </li>
+                                    </ul>
+                                    </td>-->
+                                </tr>
+                                <tr>
+                                    <td>Tanggal Lahir</td>
+                                    <td>
+                                        <div class="input-group date">
+                                            <input type="text" id="tanggallahir" th:field="*{karyawanTanggalLahir}" >
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                                </div>
+                                        </div>
+                                        <!--<div class="date" id="datetimepicker1" >
+                                            <input type="text" class="datetimepicker-input" data-target="#datetimepicker1" th:field="*{karyawanTanggalLahir}" id="date"/>
+                                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker"></div>
+                                        </div>-->
+                                    </td>
+                                    <!--<td>Tanggal Lahir</td>
+                                    <td><input type="text" th:field="*{karyawanTanggalLahir}" /></td>-->
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td><input type="email" th:field="*{karyawanEmail}" maxlength="50" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Alamat</td>
+                                    <td><input type="text" th:field="*{karyawanAlamat}" maxlength="50" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Role</td>
+                                    <td><input type="text" th:field="*{karyawanRole}" maxlength="20" /></td>
+                                </tr>
+                                <td colspan="2" th:insert="button :: button.save"></td>
+                                </tr>
+
+                            </table>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
         </div>
 
-</body>
 
-<script >
-    $('.input-group.date').datepicker({
+
+    </body>
+
+    <script >
+        $('.input-group.date').datepicker({
         autoclose: true,
         todayHighlight: true
-    });
+        });
 
 
-    document.querySelector('#add').addEventListener('submit', function(e) {
+        document.querySelector('#add').addEventListener('submit', function(e) {
         var form = this;
 
         e.preventDefault();
@@ -109,6 +120,6 @@ xmlns:th="http://www.thymeleaf.org">
         })
         });
 
-</script>
+    </script>
 
 </html>

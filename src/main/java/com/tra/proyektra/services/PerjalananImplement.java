@@ -10,6 +10,7 @@ import com.tra.proyektra.entities.Perjalanan;
 import com.tra.proyektra.repository.RepoPerjalanan;
 import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,10 +24,15 @@ public class PerjalananImplement implements PerjalananInterface{
     @Autowired
     RepoPerjalanan repoPerjalanan;
     
-    @Override
-    public Iterable<Perjalanan> findAllperjalanan() {
-        return repoPerjalanan.findAll();
-    }
+//    @Override
+//    public List<Perjalanan> findAllperjalanan() {
+//        return repoPerjalanan
+//    }
+    
+//    @Override
+//    public Iterable<Perjalanan> findAllperjalanan() {
+//        return repoPerjalanan.findAll();
+//    }
 
     @Override
     public Perjalanan getPerjalanan(Integer perjalanan_id) {
@@ -94,6 +100,28 @@ public class PerjalananImplement implements PerjalananInterface{
     public void savepengajuan(Perjalanan perjalanan) {
         repoPerjalanan.save(perjalanan);
     }
+
+    @Override
+    public Iterable<Perjalanan> findAllperjalanan() {
+        return repoPerjalanan.findAll();
+    }
+
+    @Override
+    public List<Perjalanan> Allpengajuan() {
+        return (List<Perjalanan>) repoPerjalanan.findAll();
+    }
+
+    @Override
+    public long diproses() {
+        return repoPerjalanan.count();
+    }
+
+    @Override
+    public long rerata() {
+        return repoPerjalanan.rerata();
+    }
+
+    
 
 
 

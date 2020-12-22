@@ -1,80 +1,85 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="resource :: sumber">
-</head>
-<body>
+    <head th:replace="resource :: sumber">
+    </head>
+    <body>
 
-    <nav th:insert="sidenav :: navadmin"></nav>
-    
-    <div align="center">
-        <br/>
-        <h1>Perjalanan</h1>
-        <br/>
+        <nav th:insert="sidenav :: navadmin"></nav>
+        <div id="wrapper">
+            <ul th:replace="sidenav :: sidenavadmin"></ul>
+            <div id="content-wrapper">
 
-        <div class="col-md-8">
-            <!--<div align="left">
-                <a href="/addperjalanan" th:insert="button :: button.create"></a>
-            </div>-->
-            <br/>
-            <table class="table table-hover table-bordered">
-                <thead class='thead-light'>
-                    <tr>
-                        <th>No</th>
-                        <!--<th>Perjalanan ID</th>-->
-                        <th>Tujuan Perjalan Dinas</th>
-                        <th>Jenis Kendaraan</th>
-                        <th>Kota Asal</th>
-                        <th>Kota Tujuan</th>
-                        <th>Waktu Berangkat</th>
-                        <th>Waktu Pulang</th>
-                        <th>Tanggal Berangkat</th>
-                        <th>Tanggal Pulang</th>
-                        <th>Total Diem</th>
-                        <th>Hotel</th>
-                        <th>Aksi</th>  
-                    </tr>
-                </thead>
-                <tbody> 
+                <div class="container-fluid">
 
-                    <tr th:each="perjalanan, iterStat : ${listperjalanan}">
-                        <td th:text="${iterStat.count}">No</td>
-                        <!--<td th:text="">Perjalanan ID</td>-->
-                        <td th:text="${perjalanan.perjalananTujuanDinas}">Tujuan Perjalan Dinas</td>
-                        <td th:text="${perjalanan.perjalananKendaraan}">Jenis Kendaraan</td>
-                        <td th:text="${perjalanan.perjalananKotaAsal}">Kota Asal</td>
-                        <td th:text="${perjalanan.perjalananKotaTujuan}">Kota Tujuan</td>
-                        <td th:text="${perjalanan.perjalananWaktuBerangkat}">Waktu Berangkat</td>
-                        <td th:text="${perjalanan.perjalananWaktuPulang}">Waktu Pulang</td>
-                        <td th:text="${perjalanan.perjalananTanggalBerangkat}">Tanggal Berangkat</td>
-                        <td th:text="${perjalanan.perjalananTanggalPulang}">Tanggal Pulang</td>
-                        <td th:text="${perjalanan.perjalananTotalDiem}">Total Diem</td>
-                        <td th:text="${perjalanan.perjalananHotel}">Hotel</td>
-                        <td>
-                            <a th:href="@{'/template/' + ${perjalanan.perjalananId}}"class="btn btn-warning btn-sm" role="button">email</a>
-                            <!--<a th:href="@{'/editperjalanan/' + ${perjalanan.perjalananId}}" class="btn btn-warning btn-sm" role="button">Edit</a>
-                            <a th:href="@{'/deleteperjalanan/' + ${perjalanan.perjalananId}" th:data-id='${perjalanan.perjalananId}' class="delete btn btn-danger btn-sm" role="button">Delete</a>-->
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                    <!-- DataTables Example -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            Perjalanan</div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <!--<th>Perjalanan ID</th>-->
+                                            <th>Tujuan Perjalan Dinas</th>
+                                            <th>Jenis Kendaraan</th>
+                                            <th>Kota Asal</th>
+                                            <th>Kota Tujuan</th>
+                                            <th>Waktu Berangkat</th>
+                                            <th>Waktu Pulang</th>
+                                            <th>Tanggal Berangkat</th>
+                                            <th>Tanggal Pulang</th>
+                                            <th>Total Diem</th>
+                                            <th>Hotel</th>
+                                            <th>Aksi</th>  
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="perjalanan, iterStat : ${listperjalanan}">
+                                            <td th:text="${iterStat.count}">No</td>
+                                            <!--<td th:text="">Perjalanan ID</td>-->
+                                            <td th:text="${perjalanan.perjalananTujuanDinas}">Tujuan Perjalan Dinas</td>
+                                            <td th:text="${perjalanan.perjalananKendaraan}">Jenis Kendaraan</td>
+                                            <td th:text="${perjalanan.perjalananKotaAsal}">Kota Asal</td>
+                                            <td th:text="${perjalanan.perjalananKotaTujuan}">Kota Tujuan</td>
+                                            <td th:text="${perjalanan.perjalananWaktuBerangkat}">Waktu Berangkat</td>
+                                            <td th:text="${perjalanan.perjalananWaktuPulang}">Waktu Pulang</td>
+                                            <td th:text="${perjalanan.perjalananTanggalBerangkat}">Tanggal Berangkat</td>
+                                            <td th:text="${perjalanan.perjalananTanggalPulang}">Tanggal Pulang</td>
+                                            <td th:text="${perjalanan.perjalananTotalDiem}">Total Diem</td>
+                                            <td th:text="${perjalanan.perjalananHotel}">Hotel</td>
+                                            <td>
+                                                <a th:href="@{'/template/' + ${perjalanan.perjalananId}}"class="btn btn-warning btn-sm" role="button">email</a>
+                                                <!--<a th:href="@{'/editperjalanan/' + ${perjalanan.perjalananId}}" class="btn btn-warning btn-sm" role="button">Edit</a>
+                                                <a th:href="@{'/deleteperjalanan/' + ${perjalanan.perjalananId}" th:data-id='${perjalanan.perjalananId}' class="delete btn btn-danger btn-sm" role="button">Delete</a>-->
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
 
-    </div>
 
+    </body>
 
-</body>
+    <script type="text/javascript">
 
-<script type="text/javascript">
-
-    $('.delete').click(function(e) {
-    e.preventDefault();
+        $('.delete').click(function(e) {
+        e.preventDefault();
         var id = $(this).attr(`data-id`);
         console.log(id);
         deletedata(id);
-    });
-    
-    function deletedata(id) {
-        
+        });
+
+        function deletedata(id) {
+
         Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -83,18 +88,18 @@
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, delete it!'
-      }).then((result) => {
+        }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-          ),window.location = "/deleteperjalanan/" + id;
-          }
-      })
-    }
-    
-</script>
+        Swal.fire(
+        'Deleted!',
+        'Your file has been deleted.',
+        'success'
+        ),window.location = "/deleteperjalanan/" + id;
+        }
+        })
+        }
+
+    </script>
 
 
 

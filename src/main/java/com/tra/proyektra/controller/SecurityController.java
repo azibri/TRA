@@ -32,25 +32,40 @@ public class SecurityController {
 
 //    @Autowired
 //    KaryawanImplement karyawanImplement;
+    
+    @Autowired
+    PengajuanInterface pengajuanInterface;
+    
+    @Autowired
+    KaryawanImplement karyawanImplement;
+    
+    
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
         return "login";
     }
 
-    @RequestMapping(value = "/indexadmin", method = RequestMethod.GET)
-    public String indexadmin() {
-        return "indexadmin";
-    }
-
-    @RequestMapping(value = "/indexuser", method = RequestMethod.GET)
-    public String indexuser() {
-        return "indexuser";
-    }
-
-    @RequestMapping(value = "/indexmanajer", method = RequestMethod.GET)
-    public String indexmanajer() {
-        return "indexmanajer";
-    }
+//    @RequestMapping(value = "/indexadmin", method = RequestMethod.GET)
+//    public String indexadmin() {
+//        return "indexadmin";
+//    }
+//
+//    @RequestMapping(value = "/indexuser", method = RequestMethod.GET)
+//    public String indexuser(Model model) {
+//        
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        String nama = auth.getName();
+//        System.out.println(nama);
+//        Iterable<Pengajuan> pengajuan = pengajuanInterface.findPengajuan(nama);
+//        model.addAttribute("listpengajuan", pengajuan);
+//        
+//        return "indexuser";
+//    }
+//
+//    @RequestMapping(value = "/indexmanajer", method = RequestMethod.GET)
+//    public String indexmanajer() {
+//        return "indexmanajer";
+//    }
 
 //    @RequestMapping(value = "/username", method = RequestMethod.GET)
 //    public String currentUserName(@AuthenticationPrincipal MyUserDetails userDetails, Model model) {

@@ -5,7 +5,10 @@
  */
 package com.tra.proyektra.repository;
 
+import com.tra.proyektra.config.PengajuanList;
 import com.tra.proyektra.entities.Pengajuan;
+import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -26,6 +29,26 @@ public interface RepoPengajuan extends CrudRepository<Pengajuan, Integer> {
             + "ON pengajuan.approval_id=approval.approval_id "
             + "WHERE approval.approval_nama = 'accept'", nativeQuery = true)
     public Iterable<Pengajuan> allapproval();
+    
+    @Query(value = "SELECT count(pengajuan_id) FROM pengajuan INNER JOIN approval "
+            + "ON pengajuan.approval_id=approval.approval_id "
+            + "WHERE approval.approval_nama = 'pending'", nativeQuery = true)
+    public long menunggu();
+    
+    @Query(value = "SELECT count(pengajuan_id) FROM pengajuan INNER JOIN approval "
+            + "ON pengajuan.approval_id=approval.approval_id "
+            + "WHERE approval.approval_nama = 'accept'", nativeQuery = true)
+    public long diterima();
+    
+    @Query(value = "SELECT count(pengajuan_id) FROM pengajuan INNER JOIN approval "
+            + "ON pengajuan.approval_id=approval.approval_id "
+            + "WHERE approval.approval_nama = 'decline'", nativeQuery = true)
+    public long ditolak();
+    
+    @Query(value = "SELECT COUNT(pengajuan_id) FROM pengajuan INNER JOIN karyawan "
+            + "ON pengajuan.karyawan_id=karyawan.karyawan_id "
+            + "WHERE karyawan.karyawan_nama = ?1", nativeQuery = true)
+    public long pengajuanuser(String usernama);
 
     //Menampilkan data di perjalanan
     @Query(value = "SELECT karyawan.karyawan_nama, tujuandinas.tujuandinas_nama, kendaraan.kendaraan_nama, \n"
@@ -50,6 +73,14 @@ public interface RepoPengajuan extends CrudRepository<Pengajuan, Integer> {
 
     @Query(value = "SELECT * FROM pengajuan WHERE pengajuan_id = ?1", nativeQuery = true)
     public Pengajuan pilih(Integer pengajuanid1);
+    
+    @Query(value = "SELECT MONTHNAME(pengajuan_tanggal_berangkat) AS Bulan, COUNT(pengajuan_id) AS Jumlah_Pengajuan "
+            + "FROM pengajuan where year(pengajuan_tanggal_berangkat) = year(NOW()) "
+            + "GROUP BY MONTH(pengajuan_tanggal_berangkat)", nativeQuery = true)
+    public List<PengajuanList> totalpengajuan();
+//    @Query(value = "SELECT MONTHNAME(pengajuan_tanggal_berangkat) AS Bulan, COUNT(pengajuan_id) "
+//            + "AS Jumlah_Pengajuan FROM pengajuan GROUP BY MONTH(pengajuan_tanggal_berangkat)", nativeQuery = true)
+//    public List<PengajuanList> totalpengajuan();
     
     
 
@@ -86,3 +117,7 @@ public interface RepoPengajuan extends CrudRepository<Pengajuan, Integer> {
 //    @Modifying
 //    public void softDelete(Integer pengajuan); 
 }
+
+//public interface RepoPengajuan extends JpaRepository<Pengajuan, Integer>{
+//    
+//}

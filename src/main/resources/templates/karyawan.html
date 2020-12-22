@@ -4,74 +4,84 @@
     </head>
     <body>
         <nav th:insert="sidenav :: navadmin"></nav>
+        <div id="wrapper">
+            <ul th:replace="sidenav :: sidenavadmin"></ul>
+            <div id="content-wrapper">
 
-        <div align="center">
-            <br/>
-            <h1>Karyawan</h1>
-            <br/>
+                <div class="container-fluid">
 
-            <div class="col-md-8">
-                <div align="left">
-                    <a href="/addkaryawan" th:insert="button :: button.create"></a>
+                    <!-- DataTables Example -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            Karyawan</div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <div align="left">
+                                        <a href="/addkaryawan" th:insert="button :: button.create"></a>
+                                    </div>
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <!--<th>Karyawan ID</th>-->
+                                            <th>Nama Divisi</th>
+                                            <th>Nama Karyawan</th>
+                                            <th>Jenis Kelamin</th>
+                                            <th>Tanggal Lahir</th>
+                                            <th>Email</th>
+                                            <th>Alamat</th>
+                                            <th>Role</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="karyawan, iterStat: ${listkaryawan}">
+                                            <td th:text="${iterStat.count}">No</td>
+                                            <!--<td th:text="${karyawan.karyawanId}">Karyawan ID</td>-->
+                                            <td th:text="${karyawan.divisiId.divisiNama}">Nama Divisi</td>
+                                            <td th:text="${karyawan.karyawanNama}">Nama Karyawan</td>
+                                            <td th:text="${karyawan.karyawanJenisKelamin}">Jenis Kelamin</td>
+                                            <td th:text="${#dates.format(karyawan.karyawanTanggalLahir, 'dd MMMM yyyy')}" >Tanggal Lahir</td>
+                                            <td th:text="${karyawan.karyawanEmail}">Jenis Kelamin</td>
+                                            <td th:text="${karyawan.karyawanAlamat}">Alamat</td>
+                                            <td th:text="${karyawan.karyawanRole}">Role</td>
+                                            <td>
+                                                <a th:href="@{'/editkaryawan/' + ${karyawan.karyawanId}}" class="btn btn-warning btn-sm" role="button">Edit</a>
+                                                <a th:href="@{'/deletekaryawan/' + ${karyawan.karyawanId}}" class="delete btn btn-danger btn-sm" th:data-id='${karyawan.karyawanId}' role="button">Delete</a>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                <br/>
-                <table class="table table-hover table-bordered">
-                    <thead class='thead-light'>
-                        <tr>
-                            <th>No</th>
-                            <!--<th>Karyawan ID</th>-->
-                            <th>Nama Divisi</th>
-                            <th>Nama Karyawan</th>
-                            <th>Jenis Kelamin</th>
-                            <th>Tanggal Lahir</th>
-                            <th>Email</th>
-                            <th>Alamat</th>
-                            <th>Role</th>
-                            <th>Aksi</th>  
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        <tr th:each="karyawan, iterStat: ${listkaryawan}">
-                            <td th:text="${iterStat.count}">No</td>
-                            <!--<td th:text="${karyawan.karyawanId}">Karyawan ID</td>-->
-                            <td th:text="${karyawan.divisiId.divisiNama}">Nama Divisi</td>
-                            <td th:text="${karyawan.karyawanNama}">Nama Karyawan</td>
-                            <td th:text="${karyawan.karyawanJenisKelamin}">Jenis Kelamin</td>
-                            <td th:text="${#dates.format(karyawan.karyawanTanggalLahir, 'dd MMMM yyyy')}" >Tanggal Lahir</td>
-                            <td th:text="${karyawan.karyawanEmail}">Jenis Kelamin</td>
-                            <td th:text="${karyawan.karyawanAlamat}">Alamat</td>
-                            <td th:text="${karyawan.karyawanRole}">Role</td>
-                            <td>
-                                <a th:href="@{'/editkaryawan/' + ${karyawan.karyawanId}}" class="btn btn-warning btn-sm" role="button">Edit</a>
-                                <a th:href="@{'/deletekaryawan/' + ${karyawan.karyawanId}}" class="delete btn btn-danger btn-sm" th:data-id='${karyawan.karyawanId}' role="button">Delete</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
-
         </div>
+
+
 
 
     </body>
 
-<script type="text/javascript">
+    <script type="text/javascript">
         $('.input-group.date').datepicker({
         autoclose: true,
         todayHighlight: true,
         dateFormat: 'dd-mm-yy'
-    });
+        });
 
-    $('.delete').click(function(e) {
-    e.preventDefault();
+        $('.delete').click(function(e) {
+        e.preventDefault();
         var id = $(this).attr(`data-id`);
         console.log(id);
         deletedata(id);
-    });
-    
-    function deletedata(id) {
-        
+        });
+
+        function deletedata(id) {
+
         Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -80,18 +90,18 @@
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, delete it!'
-      }).then((result) => {
+        }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-          ),window.location = "/deletekaryawan/" + id;
-          }
-      })
-    }
+        Swal.fire(
+        'Deleted!',
+        'Your file has been deleted.',
+        'success'
+        ),window.location = "/deletekaryawan/" + id;
+        }
+        })
+        }
 
 
-</script>
+    </script>
 
 </html>

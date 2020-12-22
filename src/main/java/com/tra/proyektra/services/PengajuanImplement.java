@@ -5,6 +5,7 @@
  */
 package com.tra.proyektra.services;
 
+import com.tra.proyektra.config.PengajuanList;
 import com.tra.proyektra.entities.Approval;
 import com.tra.proyektra.entities.Karyawan;
 import com.tra.proyektra.entities.Kendaraan;
@@ -14,6 +15,7 @@ import com.tra.proyektra.entities.Tujuandinas;
 import com.tra.proyektra.repository.RepoPengajuan;
 import com.tra.proyektra.repository.RepoPerjalanan;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -200,6 +202,41 @@ public class PengajuanImplement implements PengajuanInterface {
     @Override
     public Pengajuan pilih(Integer pengajuanid) {
         return repoPengajuan.pilih(pengajuanid);
+    }
+
+    @Override
+    public long hitung() {
+        return repoPengajuan.count();
+    }
+
+    @Override
+    public long diterima() {
+        return repoPengajuan.diterima();
+    }
+
+    @Override
+    public long ditolak() {
+        return repoPengajuan.ditolak();
+    }
+
+    @Override
+    public long menunggu() {
+        return repoPengajuan.menunggu();
+    }
+
+    @Override
+    public List<Pengajuan> Allpengajuan() {
+        return (List<Pengajuan>) repoPengajuan.findAll();
+    }
+
+    @Override
+    public long pengajuanuser(String usernama) {
+        return repoPengajuan.pengajuanuser(usernama);
+    }
+
+    @Override
+    public List<PengajuanList> totalpengajuan() {
+        return repoPengajuan.totalpengajuan();
     }
 
 

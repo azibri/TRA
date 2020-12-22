@@ -5,9 +5,11 @@
  */
 package com.tra.proyektra.services;
 
+import com.tra.proyektra.config.PengajuanList;
 import com.tra.proyektra.entities.Pengajuan;
 import com.tra.proyektra.entities.Perjalanan;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +21,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 public interface PengajuanInterface {
     
     Iterable<Pengajuan> findAllpengajuan();
+    List<Pengajuan> Allpengajuan();
     
     public Pengajuan getPengajuan(Integer pengajuan_id);
 
@@ -45,6 +48,18 @@ public interface PengajuanInterface {
     Optional<Pengajuan> findpengajuan(Integer pengajuan_id);
     
     public Pengajuan pilih (Integer pengajuanid);
+    
+    public long hitung();
+    
+    public long diterima();
+    
+    public long ditolak();
+    
+    public long menunggu();
+    
+    public long pengajuanuser(String usernama);
+    
+    public List<PengajuanList> totalpengajuan();
     
     
     

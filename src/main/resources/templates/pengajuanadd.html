@@ -5,154 +5,165 @@
     <body>
 
         <nav th:insert="sidenav :: navuser"></nav>
+        <div id="wrapper">
+            <ul th:replace="sidenav :: sidenavuser"></ul>
+            <div id="content-wrapper">
 
-        <div align="center">
-            <h1>Create New Pengajuan</h1>
-            <br />
+                <div class="container-fluid">
 
-            <form th:action="@{/savepengajuan}" th:object="${pengajuan}" method="POST" id="add">
-                <table border="0" cellpadding="10">
-                    <input type="hidden" th:value="${pengajuan.pengajuanId}" name="pengajuanId" readonly="readonly">
-                    <tr>
-                        <!--<td>Karyawan</td>
-                        <td><input type="text" th:field="${pengajuan.karyawanId}" /></td>-->
-                        <td>Pilih nama</td>
-                        <td>
-                            <input type="hidden" th:value="${karyawan_id}" name="karyawan_id"/>
-                            <input type="text" th:value="${idkaryawan}" readonly="readonly"  />
-                            <!--<input type="text" th:field="${pengajuan.karyawanId}" th:value="${pengajuan.karyawanId='${karyawan_id}'}"/>-->
-                        </td>
+                    <div align="center">
+                        <h1>Create New Pengajuan</h1>
+                        <br />
 
-                    </tr>
+                        <form th:action="@{/savepengajuan}" th:object="${pengajuan}" method="POST" id="add">
+                            <table border="0" cellpadding="10">
+                                <input type="hidden" th:value="${pengajuan.pengajuanId}" name="pengajuanId" readonly="readonly">
+                                <tr>
+                                    <!--<td>Karyawan</td>
+                                    <td><input type="text" th:field="${pengajuan.karyawanId}" /></td>-->
+                                    <td>Pilih nama</td>
+                                    <td>
+                                        <input type="hidden" th:value="${karyawan_id}" name="karyawan_id"/>
+                                        <input type="text" th:value="${idkaryawan}" readonly="readonly"  />
+                                        <!--<input type="text" th:field="${pengajuan.karyawanId}" th:value="${pengajuan.karyawanId='${karyawan_id}'}"/>-->
+                                    </td>
 
-                    <tr>
-                        <td>Pilih Tujuan Perjalanan Dinas</td>
-                        <td>
-                            <select class="form-control" name="tujuandinas">
-                                <option value="0">Perjalanan Dinas</option>
-                                <option th:each="tujuan : ${listtujuandinas}" th:value="${tujuan.tujuandinasId}" th:text="${tujuan.tujuandinasNama}"></option>
-                            </select>
-                        </td>
-                        <!--<td>Tujuan Perjalanan Dinas</td>
-                        <td><input type="text" th:field="*{tujuandinasId}" /></td>-->
-                    </tr>
+                                </tr>
 
-                    <tr>
-                        <!--<td>Pilih Jenis Kendaraan</td>
-                        <td>
-                        <select class="form-control" th:subject="${pengajuan.kendaraanId}">
-                            <option th:each="kendaraan : ${listkendaraan}" th:value="${kendaraan.kendaraanId}" th:text="${kendaraan.kendaraanNama}"></option>
-                        </select>
-                        </td>-->
+                                <tr>
+                                    <td>Pilih Tujuan Perjalanan Dinas</td>
+                                    <td>
+                                        <select class="form-control" name="tujuandinas">
+                                            <option value="0">Perjalanan Dinas</option>
+                                            <option th:each="tujuan : ${listtujuandinas}" th:value="${tujuan.tujuandinasId}" th:text="${tujuan.tujuandinasNama}"></option>
+                                        </select>
+                                    </td>
+                                    <!--<td>Tujuan Perjalanan Dinas</td>
+                                    <td><input type="text" th:field="*{tujuandinasId}" /></td>-->
+                                </tr>
 
-                        <!--<td>Jenis Kendaraan</td>
-                        <td><input type="text" th:field="*{kendaraanId}" /></td>-->
+                                <tr>
+                                    <!--<td>Pilih Jenis Kendaraan</td>
+                                    <td>
+                                    <select class="form-control" th:subject="${pengajuan.kendaraanId}">
+                                        <option th:each="kendaraan : ${listkendaraan}" th:value="${kendaraan.kendaraanId}" th:text="${kendaraan.kendaraanNama}"></option>
+                                    </select>
+                                    </td>-->
 
-                        <td>Pilih Jenis Kendaraan</td>
-                        <td>
-                            <select class="form-control" name="jeniskendaraan">
-                                <option value="0">Jenis Kendaraan</option>
-                                <option th:each="kendaraan : ${listkendaraan}" th:value="${kendaraan.kendaraanId}" th:text="${kendaraan.kendaraanNama}"></option>
-                            </select>
-                        </td>
-                    </tr>
+                                    <!--<td>Jenis Kendaraan</td>
+                                    <td><input type="text" th:field="*{kendaraanId}" /></td>-->
 
-
-                    <tr>
-                        <td>Kota Asal</td>
-                        <td><input type="text" name="pengajuankotaasal" maxlength="50" required="required" /></td>
-                    </tr>
-                    <tr>
-                        <td>Kota Tujuan</td>
-                        <td><input type="text" name="pengajuankotatujuan" maxlength="50" required="required" /></td>
-                    </tr>
-                    <tr>
-                        <!--<td>Pilih Waktu Berangkat</td>
-                        <td>
-                            <select class="form-control" th:field="*{pengajuanWaktuBerangkat}">
-                                <option th:each="pengajuan1 : ${pengajuanWaktuBerangkat}" th:value="${pengajuan1}" th:text="${pengajuan1}"></option>
-                                <option th:value="00.00 - 06.00">00.00 - 06.00</option>
-                                <option th:value="06.00 - 12.00">06.00 - 12.00</option>
-                                <option th:value="12.00 - 18.00">12.00 - 18.00</option>
-                                <option th:value="18.00 - 00.00">18.00 - 00.00</option>
-                            </select>
-                        </td>-->
-                        <td>Waktu Berangkat</td>
-                        <!--<td><input type="text" th:field="*{pengajuanWaktuBerangkat}" /></td>-->
-
-                        <td>
-                            <select name="pengajuanwaktuberangkat">
-                                <option th:each="waktuberangkat : ${listWaktuBerangkat}" th:value="${waktuberangkat}" th:text="${waktuberangkat}" />
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <!--<td>Pilih Waktu Pulang</td>
-                        <td>
-                            <select class="form-control" th:field="*{pengajuanWaktuPulang}">
-                                <option th:value="00.00 - 06.00">00.00 - 06.00</option>
-                                <option th:value="06.00 - 12.00">06.00 - 12.00</option>
-                                <option th:value="12.00 - 18.00">12.00 - 18.00</option>
-                                <option th:value="18.00 - 00.00">18.00 - 00.00</option>
-                            </select>
-                        </td>-->
-                        <td>Waktu Pulang</td>
-                        <td>
-                            <select name="pengajuanwaktupulang">
-                                <option th:each="waktuberangkat : ${listWaktuBerangkat}" th:value="${waktuberangkat}" th:text="${waktuberangkat}" />
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Tanggal Berangkat</td>
-                        <td>
-                            <div class="form-group">
-                                <label for="tanggalberangkat">Tanggal Berangkat</label>
-                                <input type="date" name="pengajuantanggalberangkat" id="tanggalberangkat" class="form-control">
+                                    <td>Pilih Jenis Kendaraan</td>
+                                    <td>
+                                        <select class="form-control" name="jeniskendaraan">
+                                            <option value="0">Jenis Kendaraan</option>
+                                            <option th:each="kendaraan : ${listkendaraan}" th:value="${kendaraan.kendaraanId}" th:text="${kendaraan.kendaraanNama}"></option>
+                                        </select>
+                                    </td>
+                                </tr>
 
 
-                            </div>
-                        </td>
-                        <!--<td>Tanggal Berangkat</td>
-                        <td><input type="text" th:field="*{pengajuanTanggalBerangkat}" /></td>-->
-                    </tr>
-                    <tr>
-                        <td>Tanggal Pulang</td>
-                        <td>
-                            <div class="form-group">
-                                <label for="tanggalpulang">Tanggal Pulang</label>
-                                <input type="date" name="pengajuantanggalpulang" id="tanggalpulang" class="form-control">   
-                            </div>
-                            </div>
-                        </td>
-                        <!--<td>Tanggal Pulang</td>
-                        <td><input type="text" th:field="*{pengajuanTanggalPulang}" /></td>-->
-                    </tr>
-                    <tr>
-                        <td>Hotel</td>
-                        <td><input type="text" name="pengajuanhotel" maxlength="100" required="required" /></td>
+                                <tr>
+                                    <td>Kota Asal</td>
+                                    <td><input type="text" name="pengajuankotaasal" maxlength="50" required="required" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Kota Tujuan</td>
+                                    <td><input type="text" name="pengajuankotatujuan" maxlength="50" required="required" /></td>
+                                </tr>
+                                <tr>
+                                    <!--<td>Pilih Waktu Berangkat</td>
+                                    <td>
+                                        <select class="form-control" th:field="*{pengajuanWaktuBerangkat}">
+                                            <option th:each="pengajuan1 : ${pengajuanWaktuBerangkat}" th:value="${pengajuan1}" th:text="${pengajuan1}"></option>
+                                            <option th:value="00.00 - 06.00">00.00 - 06.00</option>
+                                            <option th:value="06.00 - 12.00">06.00 - 12.00</option>
+                                            <option th:value="12.00 - 18.00">12.00 - 18.00</option>
+                                            <option th:value="18.00 - 00.00">18.00 - 00.00</option>
+                                        </select>
+                                    </td>-->
+                                    <td>Waktu Berangkat</td>
+                                    <!--<td><input type="text" th:field="*{pengajuanWaktuBerangkat}" /></td>-->
 
-                        <td><input type="hidden" th:field="${pengajuan.deleted}" th:value="${pengajuan.deleted='enable'}"/></td>
-                    </tr>
-                    <td colspan="2" th:insert="button :: button.create"></td>                    
-                    </tr>
+                                    <td>
+                                        <select name="pengajuanwaktuberangkat">
+                                            <option th:each="waktuberangkat : ${listWaktuBerangkat}" th:value="${waktuberangkat}" th:text="${waktuberangkat}" />
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <!--<td>Pilih Waktu Pulang</td>
+                                    <td>
+                                        <select class="form-control" th:field="*{pengajuanWaktuPulang}">
+                                            <option th:value="00.00 - 06.00">00.00 - 06.00</option>
+                                            <option th:value="06.00 - 12.00">06.00 - 12.00</option>
+                                            <option th:value="12.00 - 18.00">12.00 - 18.00</option>
+                                            <option th:value="18.00 - 00.00">18.00 - 00.00</option>
+                                        </select>
+                                    </td>-->
+                                    <td>Waktu Pulang</td>
+                                    <td>
+                                        <select name="pengajuanwaktupulang">
+                                            <option th:each="waktuberangkat : ${listWaktuBerangkat}" th:value="${waktuberangkat}" th:text="${waktuberangkat}" />
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Tanggal Berangkat</td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label for="tanggalberangkat">Tanggal Berangkat</label>
+                                            <input type="date" name="pengajuantanggalberangkat" id="tanggalberangkat" class="form-control">
 
-                </table>
-            </form>
 
+                                        </div>
+                                    </td>
+                                    <!--<td>Tanggal Berangkat</td>
+                                    <td><input type="text" th:field="*{pengajuanTanggalBerangkat}" /></td>-->
+                                </tr>
+                                <tr>
+                                    <td>Tanggal Pulang</td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label for="tanggalpulang">Tanggal Pulang</label>
+                                            <input type="date" name="pengajuantanggalpulang" id="tanggalpulang" class="form-control">   
+                                        </div>
+                                        </div>
+                                    </td>
+                                    <!--<td>Tanggal Pulang</td>
+                                    <td><input type="text" th:field="*{pengajuanTanggalPulang}" /></td>-->
+                                </tr>
+                                <tr>
+                                    <td>Hotel</td>
+                                    <td><input type="text" name="pengajuanhotel" maxlength="100" required="required" /></td>
+
+                                    <td><input type="hidden" th:field="${pengajuan.deleted}" th:value="${pengajuan.deleted='enable'}"/></td>
+                                </tr>
+                                <td colspan="2" th:insert="button :: button.create"></td>                    
+                                </tr>
+
+                            </table>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
         </div>
+
+
 
     </body>
 
     <script type="text/javascript">
 
-        $("#EndDate").change(function () {
-        var startDate = document.getElementById("StartDate").value;
-        var endDate = document.getElementById("EndDate").value;
+        $("#tanggalpulang").change(function () {
+        var tanggalberangkat = document.getElementById("tanggalberangkat").value;
+        var tanggalpulang = document.getElementById("tanggalpulang").value;
 
-        if (Date.parse(endDate) <= Date.parse(startDate)) {
-        alert("End date should be greater than Start date");
-        document.getElementById("EndDate").value = "";
+        if (Date.parse(tanggalpulang) <= Date.parse(tanggalberangkat)) {
+        alert("Tanggal Berangkat tidak boleh kurang dari Tanggal Pulang");
+        document.getElementById("tanggalpulang").value = "";
         }
         });
 

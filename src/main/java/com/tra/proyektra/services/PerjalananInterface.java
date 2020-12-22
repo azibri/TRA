@@ -8,6 +8,7 @@ package com.tra.proyektra.services;
 import com.tra.proyektra.entities.Perjalanan;
 import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -15,6 +16,8 @@ import java.util.Date;
  */
 public interface PerjalananInterface {
     Iterable<Perjalanan> findAllperjalanan();
+    List<Perjalanan> Allpengajuan();
+//    List<Perjalanan> findAllperjalanan();
     
     public Perjalanan getPerjalanan(Integer perjalanan_id);
 
@@ -28,6 +31,10 @@ public interface PerjalananInterface {
     void deletePerjalanan (Integer perjalanan_id);
     
     void savepengajuan(Perjalanan perjalanan);
+    
+    long diproses();
+    
+    long rerata();
     
 //    public Perjalanan caripengajuan(Integer pengajuanid);
     

@@ -35,6 +35,11 @@ public interface RepoKaryawan extends CrudRepository<Karyawan, Integer> {
             + "ON karyawan.karyawan_id = pengajuan.karyawan_id "
             + "WHERE pengajuan.pengajuan_id = ?1", nativeQuery = true)
     public Karyawan carinama(Integer pengajuanid2);
+    
+//    @Query(value = "SELECT COUNT(karyawan_id) FROM karyawan", nativeQuery = true)
+//    long karyawan();
+    
+    
 
 //    Optional<Karyawan> findByKaryawan(String KaryawanNama);
 }

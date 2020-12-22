@@ -5,9 +5,11 @@
  */
 package com.tra.proyektra.controller;
 
+import com.lowagie.text.DocumentException;
 import com.tra.proyektra.entities.Karyawan;
 import com.tra.proyektra.entities.Kendaraan;
 import com.tra.proyektra.entities.Pengajuan;
+import com.tra.proyektra.report.PerjalananPdfExporter;
 import com.tra.proyektra.repository.RepoPengajuan;
 import com.tra.proyektra.services.ApprovalInterface;
 import com.tra.proyektra.services.KaryawanImplement;
@@ -15,13 +17,17 @@ import com.tra.proyektra.services.KaryawanInterface;
 import com.tra.proyektra.services.KendaraanInterface;
 import com.tra.proyektra.services.PengajuanImplement;
 import com.tra.proyektra.services.PengajuanInterface;
+import com.tra.proyektra.services.ReportService;
 import com.tra.proyektra.services.TujuandinasInterface;
+import java.io.IOException;
 import java.security.Principal;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -69,6 +75,8 @@ public class PengajuanController {
 
     @Autowired
     RepoPengajuan repoPengajuan;
+    
+    
 
 //    @RequestMapping(value = "/pengajuan")
 //    public ModelMap allpengajuan(Authentication currentUser){
@@ -351,6 +359,8 @@ public class PengajuanController {
 //        System.out.println(pengajuan);
         return "redirect:/pengajuan";
     }
+    
+    
     
     
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fb49e496-57f4-4cd1-a05d-30eabc89b4e6">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" printOrder="Horizontal" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fb49e496-57f4-4cd1-a05d-30eabc89b4e6">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -51,7 +51,7 @@ FROM
 	<title>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="161" y="12" width="239" height="52" uuid="d537e978-7801-425c-ae63-90343ecb84e6"/>
+				<reportElement x="160" y="12" width="239" height="52" uuid="d537e978-7801-425c-ae63-90343ecb84e6"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="20"/>
 				</textElement>
@@ -68,50 +68,51 @@ FROM
 	<detail>
 		<band height="607" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="100" height="20" uuid="a4d686db-3c75-4b8d-bb17-2f4b07d7a37d"/>
+				<reportElement x="-2" y="0" width="100" height="20" uuid="a4d686db-3c75-4b8d-bb17-2f4b07d7a37d"/>
 				<textFieldExpression><![CDATA[$F{karyawan_id}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="124" y="0" width="100" height="20" uuid="4facfcf7-683f-44bc-a9c3-a3bfa8261d8d"/>
-				<textFieldExpression><![CDATA[$F{tujuandinas_id}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="250" y="0" width="100" height="20" uuid="27050649-9574-4d43-8d2b-c742e3b32d97"/>
-				<textFieldExpression><![CDATA[$F{kendaraan_id}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="410" width="80" height="20" uuid="7b445efd-23a5-46e7-8b97-6537aed7dbd3"/>
 				<textFieldExpression><![CDATA[$F{approval_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="370" y="0" width="172" height="20" uuid="183971a1-d0f5-47eb-84d3-8cf5b2b128b3"/>
+				<reportElement x="0" y="32" width="100" height="20" uuid="4facfcf7-683f-44bc-a9c3-a3bfa8261d8d"/>
+				<textFieldExpression><![CDATA[$F{tujuandinas_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="66" width="100" height="20" uuid="4facfcf7-683f-44bc-a9c3-a3bfa8261d8d"/>
+				<textFieldExpression><![CDATA[$F{kendaraan_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="104" width="172" height="20" uuid="183971a1-d0f5-47eb-84d3-8cf5b2b128b3"/>
 				<textFieldExpression><![CDATA[$F{pengajuan_kota_asal}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="147" width="137" height="20" uuid="a9b73f1f-7260-4978-a184-2964a42ba2a5"/>
+				<reportElement x="0" y="137" width="137" height="20" uuid="a9b73f1f-7260-4978-a184-2964a42ba2a5"/>
 				<textFieldExpression><![CDATA[$F{pengajuan_kota_tujuan}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="150" y="147" width="160" height="20" uuid="44dd1fc4-d4f2-4ebd-862c-b5bea9fb4914"/>
+				<reportElement x="0" y="168" width="160" height="20" uuid="44dd1fc4-d4f2-4ebd-862c-b5bea9fb4914"/>
 				<textFieldExpression><![CDATA[$F{pengajuan_waktu_berangkat}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="323" y="147" width="152" height="20" uuid="eb5a732a-5c96-4b21-81e8-ecb22e836c58"/>
+				<reportElement x="0" y="206" width="152" height="20" uuid="eb5a732a-5c96-4b21-81e8-ecb22e836c58"/>
 				<textFieldExpression><![CDATA[$F{pengajuan_waktu_pulang}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="272" width="169" height="20" uuid="03fd3562-b505-4fc8-8321-676b59a79d7c"/>
+				<reportElement x="3" y="240" width="169" height="20" uuid="03fd3562-b505-4fc8-8321-676b59a79d7c"/>
 				<textFieldExpression><![CDATA[$F{pengajuan_tanggal_berangkat}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="194" y="272" width="156" height="20" uuid="7d97b650-6993-4c65-96c6-5103f5910076"/>
+				<reportElement x="3" y="284" width="156" height="20" uuid="7d97b650-6993-4c65-96c6-5103f5910076"/>
 				<textFieldExpression><![CDATA[$F{pengajuan_tanggal_pulang}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="366" y="272" width="100" height="20" uuid="e8c638f2-cc3c-43c3-ba52-b7aff3a79306"/>
+				<reportElement x="3" y="325" width="100" height="20" uuid="e8c638f2-cc3c-43c3-ba52-b7aff3a79306"/>
 				<textFieldExpression><![CDATA[$F{pengajuan_hotel}]]></textFieldExpression>
 			</textField>
 		</band>
+		<band height="50"/>
 	</detail>
 	<columnFooter>
 		<band height="1" splitType="Stretch"/>

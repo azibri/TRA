@@ -11,7 +11,73 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-    	<nav th:insert="sidenav :: navadmin"></nav>
-    	
+        <nav th:insert="sidenav :: navadmin"></nav>
+        <div id="wrapper">
+            <ul th:replace="sidenav :: sidenavadmin"></ul>
+            <div id="content-wrapper">
+
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-xl-3 col-sm-6 mb-3">
+                            <div class="card text-white bg-primary o-hidden h-100">
+                                <div class="card-body">
+                                    <div class="mr-5" th:text="${totalkaryawan}"></div>
+                                </div>
+                                <div class="card-footer text-white clearfix small z-1">
+                                    <!--<span class="float-left">Total Pengajuan</span>-->
+                                    <h6>Jumlah Karyawan</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 mb-3">
+                            <div class="card text-white bg-success o-hidden h-100">
+                                <div class="card-body">
+                                    <div class="mr-5" th:text="${totalditerima}"></div>
+                                </div>
+                                <div class="card-footer text-white clearfix small z-1">
+                                    <h6>Pengajuan yang diterima</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 mb-3">
+                            <div class="card text-white bg-warning o-hidden h-100">
+                                <div class="card-body">
+                                    <div class="mr-5" th:text="${telahdiproses}"></div>
+                                </div>
+                                <div class="card-footer text-white clearfix small z-1">
+                                    <h6>Pengajuan yang sudah diproses</h6>
+
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xl-3 col-sm-6 mb-3">
+                            <div class="card text-white bg-danger o-hidden h-100">
+                                <div class="card-body">
+                                    <div class="mr-5" th:text="${rerata}"></div>
+                                </div>
+                                <div class="card-footer text-white clearfix small z-1">
+                                    <h6>Rata-rata lama perjalanan dinas</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <!--        <nav th:insert="sidenav :: navadmin"></nav>
+                <div id="wrapper">
+                    <ul th:insert="sidenav :: sidenavadmin"></ul>
+                    <div id="content-wrapper">
+        
+                        <div class="container-fluid">
+                        </div>
+                    </div>
+                </div>-->
+
+
     </body>
 </html>

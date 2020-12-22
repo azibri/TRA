@@ -3,93 +3,56 @@
     <body>
 
         <nav th:insert="sidenav :: navadmin"></nav>
+        <div id="wrapper">
+            <ul th:replace="sidenav :: sidenavadmin"></ul>
+            <div id="content-wrapper">
 
+                <div class="container-fluid">
 
-        <div align="center">
-            <br/>
-            <h1>Kendaraan</h1>
-            <br/>
+                    <!-- DataTables Example -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            Kendaraan</div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <a id="exampleModal" aria-labelledby="exampleModal" class="btn btn-primary nBtn" data-toggle="modal" data-target="#modalcreate">Create</a>
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <!--<th>Kendaraan ID</th>-->
+                                            <th>Kendaraan Jenis</th>
+                                            <th>Keterangan</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="kendaraan, iterStat : ${listkendaraan}">
+                                            <td th:text="${iterStat.count}">No</td>
+                                            <!--<td th:text="${kendaraan.kendaraanId}">Kendaraan ID</td>-->
+                                            <td th:text="${kendaraan.kendaraanNama}">Kendaraan Jenis</td>
+                                            <td th:text="${kendaraan.kendaraanKeterangan}">Keterangan</td>
+                                            <td>
+                                                <!--<a class="eBtn btn btn-warning btn-sm" role="button" th:href="@{http://localhost:8081/editkendaraan/(id=${kendaraan.kendaraanId})}">Edit</a>-->
 
-            <div class="col-md-8">
-                <div align="left">
-                    <!--Button menampilkan modal-->
-                    <a id="exampleModal" aria-labelledby="exampleModal" class="btn btn-primary nBtn" data-toggle="modal" data-target="#modalcreate">Create</a>
-                    <!--<button class="btn btn-primary" data-toggle="modal" data-target="#modalcreate" href="/">Create</button>-->
+                                                <!--<a href="#modaledit" class="edit btn btn-warning btn-sm" data-toggle="modal" >Edit</a>-->
 
+                                                <a th:href="@{/editkendaraan/(kendaraan_id=${kendaraan.kendaraanId})}" class="edit btn btn-warning btn-sm">Edit</a>
+                                                <!--<a th:href="@{'/editkendaraan/' + ${kendaraan.kendaraanId}}" class="edit btn btn-warning btn-sm" role="button">Edit</a>-->
+                                                <a th:href="@{'/deletekendaraan/' + ${kendaraan.kendaraanId}}" th:data-id='${kendaraan.kendaraanId}' class="delete btn btn-danger btn-sm" role="button">Delete</a>
 
+                                            </td>
+                                        </tr>
 
-                    <!--<div class="modal fade" id="addmodal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Create Kendaraan</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true"></span>
-                                    </button>
-                                </div>
-    
-                                <div class="modal-body">
-                                    <form>
-                                        
-                                        <div class="form-group">
-                                            <label>Nama Jenis Kendaraan</label>
-                                            <input type="text" class="form-control" id="jenis">
-                                        </div>
-    
-                                        <div class="form-group">
-                                            <label>Keterangan</label>
-                                            <textarea class="form-control" id="keterangan"></textarea>
-                                        </div>
-    
-                                        <div class="modal-footer">
-                                            <button type="button">Create</button>
-                                        </div>
-    
-                                    </form>
-                                </div>
-    
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        
-                    </div>-->
+                    </div>
 
-                    <!--<a href="/add" th:insert = "button :: button.create"></a>-->
                 </div>
-                <br/>
-                <table class="table table-hover table-bordered">
-                    <thead class='thead-light'>
-                        <tr>
-                            <th>No</th>
-                            <!--<th>Kendaraan ID</th>-->
-                            <th>Kendaraan Jenis</th>
-                            <th>Keterangan</th>
-                            <th>Aksi</th>  
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        <tr th:each="kendaraan, iterStat : ${listkendaraan}">
-                            <td th:text="${iterStat.count}">No</td>
-                            <!--<td th:text="${kendaraan.kendaraanId}">Kendaraan ID</td>-->
-                            <td th:text="${kendaraan.kendaraanNama}">Kendaraan Jenis</td>
-                            <td th:text="${kendaraan.kendaraanKeterangan}">Keterangan</td>
-                            <td>
-                                <!--<a class="eBtn btn btn-warning btn-sm" role="button" th:href="@{http://localhost:8081/editkendaraan/(id=${kendaraan.kendaraanId})}">Edit</a>-->
-
-                                <!--<a href="#modaledit" class="edit btn btn-warning btn-sm" data-toggle="modal" >Edit</a>-->
-                                
-                                <a th:href="@{/editkendaraan/(kendaraan_id=${kendaraan.kendaraanId})}" class="edit btn btn-warning btn-sm">Edit</a>
-                                <!--<a th:href="@{'/editkendaraan/' + ${kendaraan.kendaraanId}}" class="edit btn btn-warning btn-sm" role="button">Edit</a>-->
-                                <a th:href="@{'/deletekendaraan/' + ${kendaraan.kendaraanId}}" th:data-id='${kendaraan.kendaraanId}' class="delete btn btn-danger btn-sm" role="button">Delete</a>
-
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
-
         </div>
-
 
         <!--Modal Create-->
         <div class="myForm">
@@ -166,7 +129,7 @@
 
 
                             <!--<form th:action="@{/savekendaraan}" method="put" id="edit">-->
-                                <form th:action="@{/savekendaraan}" method="post" id="edit">
+                            <form th:action="@{/savekendaraan}" method="post" id="edit">
                                 <input type="hidden" id="id" name="kendaraanId" readonly="readonly">
 
                                 <div class="form-group">
@@ -203,21 +166,21 @@
 
 
         $('document').ready(function() {
-            $('.table .edit').on('click', function(event) {
+        $('.table .edit').on('click', function(event) {
 
-                event.preventDefault();
+        event.preventDefault();
 
-                var href = $(this).attr('href');
+        var href = $(this).attr('href');
 
-                $.get(href, function(kendaraan, status){
-                $('#id').val(kendaraan.kendaraanId);
-                $('#nama').val(kendaraan.kendaraanNama);
-                $('#keterangan').val(kendaraan.kendaraanKeterangan);
-                });
+        $.get(href, function(kendaraan, status){
+        $('#id').val(kendaraan.kendaraanId);
+        $('#nama').val(kendaraan.kendaraanNama);
+        $('#keterangan').val(kendaraan.kendaraanKeterangan);
+        });
 
-                $('#modaledit').modal();
+        $('#modaledit').modal();
 
-            });
+        });
         });
 
 

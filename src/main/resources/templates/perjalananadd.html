@@ -5,132 +5,155 @@
     <body>
 
         <nav th:insert="sidenav :: navadmin"></nav>
+        <div id="wrapper">
+            <ul th:replace="sidenav :: sidenavadmin"></ul>
+            <div id="content-wrapper">
 
-        <div align="center">
-            <h1>Create New Perjalanan</h1>
-            <br />
-
-            <form th:action="@{/saveperjalanan}" th:object="${perjalanan}" method="POST" id="">
-                <table border="0" cellpadding="10">
-              
-                    <input type="hidden" th:value="${pengajuanid}" name="perjalananpengajuan" />
-                    <!--<tr>
-                        <td>Tujuan Perjalanan Dinas</td>
-                        <td><input type="text" th:field="${perjalanan.{pengajuanid}.tujuandinasNama}"  readonly="readonly" /></td>
-                    </tr>
-                    <tr>
-                        <td>Jenis Kendaraan</td>
-                        <td><input type="text" th:field="${perjalanan.{pengajuanid}.kendaraanId.kendaraanNama}" readonly="readonly"/></td>
-                    </tr>-->
-
-                    <tr>
-                        <td>Karyawan</td>
-                        <td><input type="text" th:value="${namakaryawan}" name="perjalanankaryawan" readonly="readonly" /></td>
-                    </tr>
-                    <tr>
-                        <td>Tujuan Perjalanan Dinas</td>
-                        <td><input type="text" th:value="${namatujuan}" name="perjalanantujuandinas" maxlength="50" /></td>
-                    </tr>
-                    <tr>
-                        <td>Jenis Kendaraan</td>
-                        <td><input type="text" th:value="${namakendaraan}" name="perjalanankendaraan" maxlength="50" /></td>
-                    </tr>
-
-                    <tr>
-                        <td>Kota Asal</td>
-                        <td><input type="text" th:value="${kotaasal}" name="perjalanankotaasal" maxlength="50" /></td>
-                    </tr>
-                    <tr>
-                        <td>Kota Tujuan</td>
-                        <td><input type="text" th:value="${kotatujuan}" name="perjalanankotatujuan" maxlength="50" /></td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-                        <td rowspan="2">Waktu Berangkat</td>
-                        <td><input type="text" th:value="${waktuberangkat}" readonly="readonly"></td>
-                        
-                        <!--<td><input type="text" th:field="*{perjalananWaktuBerangkat}" /></td>-->
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="time" id="time" name="perjalananwaktuberangkat"  placeholder="Time" class="form-control" />
-                            <!--<div class="input-group date" id="event_time">
-                                <input type="text" id="time" th:field="*{perjalananWaktuBerangkat}" placeholder="Time" class="form-control" />
-                                <div class="input-group-addon input-group-append">
-                                    <div class="input-group-text">
-                                        <i class="fa fa-clock-o"></i>
-                                    </div>
-                                </div>
-                            </div>-->
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td rowspan="2">Waktu Pulang</td>
-                        <td><input type="text" th:value="${waktupulang}" readonly="readonly"></td>
-                        
-                        <!--<td>
-                            <input class="form-control timepicker" type="text" />
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fa fa-clock-o"></i></span>
-                            </div>
-                        </td>-->
-                        <!--<td><input type="text" th:field="*{perjalananWaktuPulang}"  /></td>-->
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="time" th:value="${waktupulang}" id="time" name="perjalananwaktupulang"  placeholder="Time" class="form-control" />
-                            <!--<div class="input-group date" id="event_time">
-                                <input type="text" id="time" th:field="*{perjalananWaktuPulang}" placeholder="Time" class="form-control" />
-                                <div class="input-group-addon input-group-append">
-                                    <div class="input-group-text">
-                                        <i class="fa fa-clock-o"></i>
-                                    </div>
-                                </div>
-                            </div>-->
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td></td>
-                    </tr>
-
-                    <tr>
-
-                        <td>Tanggal Berangkat</td>
-                        <td><input type="date" th:value="${tanggalberangkat}" name="perjalanantanggalberangkat"  class="form-control" /></td>
-                    </tr>
-                    <tr>
-                        <td>Tanggal Pulang</td>
-                        <td><input type="date" th:value="${tanggalpulang}" name="perjalanantanggalpulang"  class="form-control" /></td>
-                    </tr>
-                    <tr>
-                        <td>Hotel</td>
-                        <td><input type="text" th:value="${hotel}" name="perjalananhotel" maxlength="100" /></td>
-                    </tr>
-                    <tr>
-                        <!--<td>Total Diem</td>-->
-                        <td><input type="hidden" maxlength="15" min="1" name="perjalanantotaldiem" /></td>
-                    </tr>
-                    
-                    <input type="hidden" th:value="${pengajuanKomentar}" />
+                <div class="container-fluid">
 
 
-                    <td colspan="2" th:insert="button :: button.create"></td>                    
-                    </tr>
+                    <div align="center">
+                        <h1>Create New Perjalanan</h1>
+                        <br />
 
-                </table>
-            </form>
+                        <form th:action="@{/saveperjalanan}" th:object="${perjalanan}" method="POST" id="">
+                            <table border="0" cellpadding="10">
 
+                                <input type="hidden" th:value="${pengajuanid}" name="perjalananpengajuan" />
+                                <!--<tr>
+                                    <td>Tujuan Perjalanan Dinas</td>
+                                    <td><input type="text" th:field="${perjalanan.{pengajuanid}.tujuandinasNama}"  readonly="readonly" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Jenis Kendaraan</td>
+                                    <td><input type="text" th:field="${perjalanan.{pengajuanid}.kendaraanId.kendaraanNama}" readonly="readonly"/></td>
+                                </tr>-->
+
+                                <tr>
+                                    <td>Karyawan</td>
+                                    <td><input type="text" th:value="${namakaryawan}" name="perjalanankaryawan" readonly="readonly" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Tujuan Perjalanan Dinas</td>
+                                    <td><input type="text" th:value="${namatujuan}" name="perjalanantujuandinas" maxlength="50" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Jenis Kendaraan</td>
+                                    <td><input type="text" th:value="${namakendaraan}" name="perjalanankendaraan" maxlength="50" /></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Kota Asal</td>
+                                    <td><input type="text" th:value="${kotaasal}" name="perjalanankotaasal" maxlength="50" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Kota Tujuan</td>
+                                    <td><input type="text" th:value="${kotatujuan}" name="perjalanankotatujuan" maxlength="50" /></td>
+                                </tr>
+
+                                <tr>
+                                    <td></td>
+                                </tr>
+
+                                <tr>
+                                    <td rowspan="2">Waktu Berangkat</td>
+                                    <td><input type="text" th:value="${waktuberangkat}" readonly="readonly"></td>
+
+                                    <!--<td><input type="text" th:field="*{perjalananWaktuBerangkat}" /></td>-->
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="time" id="time" name="perjalananwaktuberangkat"  placeholder="Time" class="form-control" />
+                                        <!--<div class="input-group date" id="event_time">
+                                            <input type="text" id="time" th:field="*{perjalananWaktuBerangkat}" placeholder="Time" class="form-control" />
+                                            <div class="input-group-addon input-group-append">
+                                                <div class="input-group-text">
+                                                    <i class="fa fa-clock-o"></i>
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td rowspan="2">Waktu Pulang</td>
+                                    <td><input type="text" th:value="${waktupulang}" readonly="readonly"></td>
+
+                                    <!--<td>
+                                        <input class="form-control timepicker" type="text" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fa fa-clock-o"></i></span>
+                                        </div>
+                                    </td>-->
+                                    <!--<td><input type="text" th:field="*{perjalananWaktuPulang}"  /></td>-->
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="time" th:value="${waktupulang}" id="time" name="perjalananwaktupulang"  placeholder="Time" class="form-control" />
+                                        <!--<div class="input-group date" id="event_time">
+                                            <input type="text" id="time" th:field="*{perjalananWaktuPulang}" placeholder="Time" class="form-control" />
+                                            <div class="input-group-addon input-group-append">
+                                                <div class="input-group-text">
+                                                    <i class="fa fa-clock-o"></i>
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td></td>
+                                </tr>
+
+                                <tr>
+
+                                    <td>Tanggal Berangkat</td>
+                                    <td><input type="date" id="tanggalberangkat" th:value="${tanggalberangkat}" name="perjalanantanggalberangkat"  class="form-control" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Tanggal Pulang</td>
+                                    <td><input type="date" id="tanggalpulang" th:value="${tanggalpulang}" name="perjalanantanggalpulang"  class="form-control" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Hotel</td>
+                                    <td><input type="text" th:value="${hotel}" name="perjalananhotel" maxlength="100" /></td>
+                                </tr>
+                                <tr>
+                                    <!--<td>Total Diem</td>-->
+                                    <td><input type="hidden" maxlength="15" min="1" name="perjalanantotaldiem" /></td>
+                                </tr>
+
+                                <input type="hidden" th:value="${pengajuanKomentar}" />
+
+
+                                <td colspan="2" th:insert="button :: button.create"></td>                    
+                                </tr>
+
+                            </table>
+                        </form>
+
+                    </div>
+
+
+                </div>
+            </div>
         </div>
+
+
 
     </body>
 
     <script type="text/javascript">
+
+        $("#tanggalpulang").change(function () {
+        var tanggalberangkat = document.getElementById("tanggalberangkat").value;
+        var tanggalpulang = document.getElementById("tanggalpulang").value;
+
+        if (Date.parse(tanggalpulang) <= Date.parse(tanggalberangkat)) {
+        alert("Tanggal Berangkat tidak boleh kurang dari Tanggal Pulang");
+        document.getElementById("tanggalpulang").value = "";
+        }
+        });
 
         $('#event_time').datetimepicker({
         /*"allowInputToggle": true,
