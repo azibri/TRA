@@ -10,8 +10,13 @@ import com.tra.proyektra.services.KaryawanImplement;
 import com.tra.proyektra.services.PengajuanInterface;
 import com.tra.proyektra.services.PerjalananInterface;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -32,19 +37,76 @@ public class SecurityController {
 
 //    @Autowired
 //    KaryawanImplement karyawanImplement;
-    
     @Autowired
     PengajuanInterface pengajuanInterface;
-    
+
     @Autowired
     KaryawanImplement karyawanImplement;
-    
-    
+
+//    @RequestMapping(value = "/login", method = RequestMethod.GET)
+//    public String login(Model model) {
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        Collection<? extends GrantedAuthority> hal = auth.getAuthorities();
+//        List<String> roles = new ArrayList<String>();
+//        
+//        for (GrantedAuthority a : hal) {
+//            roles.add(a.getAuthority());
+//        }
+//        
+////        System.out.println("ini " +hal);
+//        if(auth == null || auth instanceof AnonymousAuthenticationToken){
+////            System.out.println("ini "+auth);
+//           return "login"; 
+//        }
+//        else if (roles.contains("ROLE_USER")) {
+//            return "/indexuser";
+//        } else if (roles.contains("ROLE_ADMIN")) {
+//            return "/indexadmin";
+//        } 
+//        else if (roles.contains("ROLE_MANAJER")) {
+//            return "/indexmanajer";
+//        }
+////        return "login";
+//        return "redirect:/";
+//    }
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login() {
-        return "login";
+    public String login(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+//        System.out.println("ini " +hal);
+        if (auth == null || auth instanceof AnonymousAuthenticationToken) {
+//            System.out.println("ini "+auth);
+            return "login";
+        }
+
+//        return "login";
+        return "redirect:/404";
     }
 
+//    @RequestMapping(value = "/login", method = RequestMethod.GET)
+//    public String login(Model model) {
+//        
+//        return "login";
+//    }
+//    
+    @RequestMapping(value = "/")
+    public String unmaping(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+//        System.out.println("ini " +hal);
+        if (auth == null || auth instanceof AnonymousAuthenticationToken) {
+//            System.out.println("ini "+auth);
+            return "login";
+        }
+
+//        return "login";
+        return "redirect:/404";
+    }
+
+    @RequestMapping(value = "/404")
+    public String error() {
+        return "404";
+    }
 //    @RequestMapping(value = "/indexadmin", method = RequestMethod.GET)
 //    public String indexadmin() {
 //        return "indexadmin";
@@ -79,7 +141,6 @@ public class SecurityController {
 //      model.addAttribute("username", name);
 //      return "username";
 //    }
-    
 //    @RequestMapping(value = "/username", method = RequestMethod.GET)
 //    @ResponseBody
 //    public String currentUserName(Principal principal) {

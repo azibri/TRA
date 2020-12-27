@@ -27,24 +27,24 @@ public interface RepoPengajuan extends CrudRepository<Pengajuan, Integer> {
 
     @Query(value = "SELECT * FROM pengajuan INNER JOIN approval "
             + "ON pengajuan.approval_id=approval.approval_id "
-            + "WHERE approval.approval_nama = 'accept'", nativeQuery = true)
+            + "WHERE approval.approval_nama = 'accept' and pengajuan.deleted=0", nativeQuery = true)
     public Iterable<Pengajuan> allapproval();
-    
+
     @Query(value = "SELECT count(pengajuan_id) FROM pengajuan INNER JOIN approval "
             + "ON pengajuan.approval_id=approval.approval_id "
             + "WHERE approval.approval_nama = 'pending'", nativeQuery = true)
     public long menunggu();
-    
+
     @Query(value = "SELECT count(pengajuan_id) FROM pengajuan INNER JOIN approval "
             + "ON pengajuan.approval_id=approval.approval_id "
             + "WHERE approval.approval_nama = 'accept'", nativeQuery = true)
     public long diterima();
-    
+
     @Query(value = "SELECT count(pengajuan_id) FROM pengajuan INNER JOIN approval "
             + "ON pengajuan.approval_id=approval.approval_id "
             + "WHERE approval.approval_nama = 'decline'", nativeQuery = true)
     public long ditolak();
-    
+
     @Query(value = "SELECT COUNT(pengajuan_id) FROM pengajuan INNER JOIN karyawan "
             + "ON pengajuan.karyawan_id=karyawan.karyawan_id "
             + "WHERE karyawan.karyawan_nama = ?1", nativeQuery = true)
@@ -73,16 +73,29 @@ public interface RepoPengajuan extends CrudRepository<Pengajuan, Integer> {
 
     @Query(value = "SELECT * FROM pengajuan WHERE pengajuan_id = ?1", nativeQuery = true)
     public Pengajuan pilih(Integer pengajuanid1);
-    
+
     @Query(value = "SELECT MONTHNAME(pengajuan_tanggal_berangkat) AS Bulan, COUNT(pengajuan_id) AS Jumlah_Pengajuan "
             + "FROM pengajuan where year(pengajuan_tanggal_berangkat) = year(NOW()) "
             + "GROUP BY MONTH(pengajuan_tanggal_berangkat)", nativeQuery = true)
-    public List<PengajuanList> totalpengajuan();
+    public List<Object[]> totalpengajuan();
+
+    @Query(value = "SELECT MONTHNAME(pengajuan_tanggal_berangkat) AS Bulan, COUNT(pengajuan_id) AS Jumlah_Pengajuan \n"
+            + "FROM pengajuan INNER JOIN karyawan ON pengajuan.karyawan_id=karyawan.karyawan_id WHERE karyawan.karyawan_nama = ?1 "
+            + "GROUP BY MONTH(pengajuan_tanggal_berangkat)", nativeQuery = true)
+    public List<Object[]> totalpengajuanuser(String nama);
+    
+    @Query(value = "SELECT COUNT(*) FROM pengajuan WHERE approval_id<>2", nativeQuery = true)
+    public long hitung();
+    
+    @Query(value = "SELECT * FROM pengajuan WHERE approval_id<>2", nativeQuery = true)
+    Iterable<Pengajuan> findAllpengajuan();
+//    @Query(value = "SELECT MONTHNAME(pengajuan_tanggal_berangkat) AS Bulan, COUNT(pengajuan_id) AS Jumlah_Pengajuan "
+//            + "FROM pengajuan where year(pengajuan_tanggal_berangkat) = year(NOW()) "
+//            + "GROUP BY MONTH(pengajuan_tanggal_berangkat)", nativeQuery = true)
+//    public List<PengajuanList> totalpengajuan();
 //    @Query(value = "SELECT MONTHNAME(pengajuan_tanggal_berangkat) AS Bulan, COUNT(pengajuan_id) "
 //            + "AS Jumlah_Pengajuan FROM pengajuan GROUP BY MONTH(pengajuan_tanggal_berangkat)", nativeQuery = true)
 //    public List<PengajuanList> totalpengajuan();
-    
-    
 
 //    @Query(value = "SELECT * FROM karyawan\n"
 //            + "WHERE karyawan_nama = ?1", nativeQuery = true)

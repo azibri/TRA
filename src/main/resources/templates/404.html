@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <style type="text/css">
+
+            body{
+                background-color: #212529;
+                overflow-x: hidden;
+            }
+
+            .tengah {
+                align-items: left;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .error {
+                font-size: 200px;
+                text-align: center;
+                color: #fff;
+                font-family: times new roman;
+            }
+
+            .tulisan {
+                font-size: 40px;
+                color: #fff;
+                text-align: center;
+            }
+
+            form {
+                border: none;
+                background-color: #fff;
+                font-size: 50px;
+                width: 500px;
+                height: 60px;
+                margin: 0 auto;
+            }
+
+            input {
+                border: none;
+                background-color: #fff;
+                font-size: 50px;
+                width: 500px;
+                height: 60px;
+                margin: 0 auto;
+            }
+
+        </style>
+    </head>
+    <body>
+
+        <div class="tengah">
+            <div class="error">
+                404
+            </div>
+            <br />
+            <div class="tulisan">
+                Maaf anda tidak punya akses ke halaman tersebut
+                <br />
+                Anda harus Logout terlebih dahulu
+            </div>
+            <br />
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Logout"/>
+            </form>
+        </div>
+
+    </body>
+</html>

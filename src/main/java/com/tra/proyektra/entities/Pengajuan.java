@@ -25,6 +25,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 /**
  *
@@ -32,6 +34,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "pengajuan")
+@SQLDelete(sql = "UPDATE pengajuan set deleted=true WHERE pengajuan_id = ?")
+@Where(clause = "deleted = false")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Pengajuan.findAll", query = "SELECT p FROM Pengajuan p")

@@ -81,17 +81,17 @@
 
                                 <div class="form-group">
                                     Nama Tujuan Dinas
-                                    <input th:field="*{tujuandinasNama}" maxlength="50" type="text" class="form-control">
+                                    <input th:field="*{tujuandinasNama}" required="required" maxlength="50" type="text" class="form-control" id="nama1" onkeyup="validasi();">
                                 </div>
 
                                 <div class="form-group">
                                     Diem
-                                    <input th:field="*{tujuandinasDiem}" maxlength="20" min="1" type="number" class="form-control">
+                                    <input th:field="*{tujuandinasDiem}" required="required" maxlength="20" min="1" type="number" class="form-control">
                                 </div>
 
                                 <div class="form-group">
                                     Keterangan
-                                    <textarea th:field="*{tujuandinasKeterangan}" maxlength="100" class="form-control"></textarea>
+                                    <textarea th:field="*{tujuandinasKeterangan}" required="required" maxlength="100" class="form-control" id="keterangan2" onkeyup="validasi();"></textarea>
                                 </div>
 
                         </div>
@@ -135,17 +135,17 @@
 
                                 <div class="form-group">
                                     Nama Tujuan Dinas
-                                    <input name="tujuandinasNama" maxlength="50" id="nama" type="text" class="form-control">
+                                    <input name="tujuandinasNama" maxlength="50" id="nama" type="text" required="required" class="nama form-control" onkeyup="validasi();">
                                 </div>
 
                                 <div class="form-group">
                                     Diem
-                                    <input name="tujuandinasDiem" id="diem" type="number" maxlength="20" min="1" class="form-control">
+                                    <input name="tujuandinasDiem" id="diem" type="number" maxlength="20" min="1" required="required" class="form-control">
                                 </div>
 
                                 <div class="form-group">
                                     Keterangan
-                                    <textarea class="form-control" maxlength="100" name="tujuandinasKeterangan" id="keterangan"></textarea>
+                                    <textarea class="keterangan form-control" maxlength="100" name="tujuandinasKeterangan" id="keterangan" required="required" onkeyup="validasi();"></textarea>
                                 </div>
 
                         </div>
@@ -166,6 +166,21 @@
     </body>
 
     <script type="text/javascript">
+
+        function validasi() {
+            var element1 = document.getElementById('nama1');
+            var element2 = document.getElementById('keterangan2');
+            var element3 = document.getElementById('nama');
+            var element4 = document.getElementById('keterangan');
+
+            element1.value = element1.value.replace(/[^A-Za-z/,.""&() ]+/,'');
+            element2.value = element2.value.replace(/[^A-Za-z/,.""&()\n ]+/,'');
+            element3.value = element3.value.replace(/[^A-Za-z/,.""&() ]+/,'');
+            element4.value = element4.value.replace(/[^A-Za-z/,.""&()\n ]+/,'');
+        };
+
+        
+
 
         $('document').ready(function() {
         $('.table .edit').on('click', function(event) {

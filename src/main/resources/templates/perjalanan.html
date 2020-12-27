@@ -21,7 +21,7 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <!--<th>Perjalanan ID</th>-->
+                                            <th>Nama Karyawan</th>
                                             <th>Tujuan Perjalan Dinas</th>
                                             <th>Jenis Kendaraan</th>
                                             <th>Kota Asal</th>
@@ -39,6 +39,7 @@
                                         <tr th:each="perjalanan, iterStat : ${listperjalanan}">
                                             <td th:text="${iterStat.count}">No</td>
                                             <!--<td th:text="">Perjalanan ID</td>-->
+                                            <td th:text="${perjalanan.perjalananKaryawan}">Nama Karyawan</td>
                                             <td th:text="${perjalanan.perjalananTujuanDinas}">Tujuan Perjalan Dinas</td>
                                             <td th:text="${perjalanan.perjalananKendaraan}">Jenis Kendaraan</td>
                                             <td th:text="${perjalanan.perjalananKotaAsal}">Kota Asal</td>

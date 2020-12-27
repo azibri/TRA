@@ -27,6 +27,16 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class PerjalananPdfExporter {
     
+    
+    private List<Perjalanan> perperjalanan/*(Integer perjalanan_id)*/;
+    
+//    private Perjalanan perperjalanan(Integer perjalanan_id);
+//    public PerperjalananPdfExporter(Perjalanan perperjalanan) {
+//        this.perperjalanan = perperjalanan;
+//    }
+    
+    
+    
     private List<Perjalanan> listperjalanan;
     
     public PerjalananPdfExporter(List<Perjalanan> listperjalanan) {
@@ -41,6 +51,8 @@ public class PerjalananPdfExporter {
 //        table.addCell(cell);
         Font font = FontFactory.getFont(FontFactory.TIMES_ROMAN);
         font.setColor(Color.WHITE);
+        font.setSize(12);
+        
         cell.setPhrase(new Phrase("Nama Karyawan", font));
         table.addCell(cell);
         
@@ -122,6 +134,10 @@ public class PerjalananPdfExporter {
         document.add(table);
         
         document.close();
+    }
+
+    private void perperjalanan(List<Object[]> perperjalanan) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

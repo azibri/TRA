@@ -295,11 +295,11 @@ public class PengajuanController {
         List<String> listWaktuBerangkat = Arrays.asList("00.00 - 06.00", "06.00 - 12.00", "12.00 - 18.00", "18.00 - 00.00");
         model.addAttribute("listWaktuBerangkat", listWaktuBerangkat);
         
-        String tanggalberangkat1 = pengajuanInterface.getPengajuan(pengajuan_id).getPengajuanWaktuBerangkat();
-        model.addAttribute("tanggalberankat", tanggalberangkat1);
+        String waktuberangkat1 = pengajuanInterface.getPengajuan(pengajuan_id).getPengajuanWaktuBerangkat();
+        model.addAttribute("waktuberangkat1", waktuberangkat1);
         
-        String tanggalpulang1 = pengajuanInterface.getPengajuan(pengajuan_id).getPengajuanWaktuPulang();
-        model.addAttribute("tanggalpulang", tanggalpulang1);
+        String waktupulang1 = pengajuanInterface.getPengajuan(pengajuan_id).getPengajuanWaktuPulang();
+        model.addAttribute("waktupulang1", waktupulang1);
         
         model.addAttribute("pengajuan", pengajuan);
         return "pengajuanedit";

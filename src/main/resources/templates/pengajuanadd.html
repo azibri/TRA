@@ -33,8 +33,8 @@
                                 <tr>
                                     <td>Pilih Tujuan Perjalanan Dinas</td>
                                     <td>
-                                        <select class="form-control" name="tujuandinas">
-                                            <option value="0">Perjalanan Dinas</option>
+                                        <select class="form-control" name="tujuandinas" required="required">
+                                            <option value="" disabled="" selected="">Perjalanan Dinas</option>
                                             <option th:each="tujuan : ${listtujuandinas}" th:value="${tujuan.tujuandinasId}" th:text="${tujuan.tujuandinasNama}"></option>
                                         </select>
                                     </td>
@@ -55,8 +55,8 @@
 
                                     <td>Pilih Jenis Kendaraan</td>
                                     <td>
-                                        <select class="form-control" name="jeniskendaraan">
-                                            <option value="0">Jenis Kendaraan</option>
+                                        <select class="form-control" name="jeniskendaraan" required="required">
+                                            <option value="" disabled="" selected="">Jenis Kendaraan</option>
                                             <option th:each="kendaraan : ${listkendaraan}" th:value="${kendaraan.kendaraanId}" th:text="${kendaraan.kendaraanNama}"></option>
                                         </select>
                                     </td>
@@ -65,11 +65,11 @@
 
                                 <tr>
                                     <td>Kota Asal</td>
-                                    <td><input type="text" name="pengajuankotaasal" maxlength="50" required="required" /></td>
+                                    <td><input type="text" name="pengajuankotaasal" maxlength="50" required="required" id="kotaasal" onkeyup="validasi();" /></td>
                                 </tr>
                                 <tr>
                                     <td>Kota Tujuan</td>
-                                    <td><input type="text" name="pengajuankotatujuan" maxlength="50" required="required" /></td>
+                                    <td><input type="text" name="pengajuankotatujuan" maxlength="50" required="required" id="kotatujuan" onkeyup="validasi();" /></td>
                                 </tr>
                                 <tr>
                                     <!--<td>Pilih Waktu Berangkat</td>
@@ -86,7 +86,8 @@
                                     <!--<td><input type="text" th:field="*{pengajuanWaktuBerangkat}" /></td>-->
 
                                     <td>
-                                        <select name="pengajuanwaktuberangkat">
+                                        <select name="pengajuanwaktuberangkat" required="">
+                                            <option value="" selected="" disabled="">pilih waktu berangkat</option>
                                             <option th:each="waktuberangkat : ${listWaktuBerangkat}" th:value="${waktuberangkat}" th:text="${waktuberangkat}" />
                                         </select>
                                     </td>
@@ -103,7 +104,8 @@
                                     </td>-->
                                     <td>Waktu Pulang</td>
                                     <td>
-                                        <select name="pengajuanwaktupulang">
+                                        <select name="pengajuanwaktupulang" required="required">
+                                            <option value="" selected="" disabled="">pilih waktu pulang</option>
                                             <option th:each="waktuberangkat : ${listWaktuBerangkat}" th:value="${waktuberangkat}" th:text="${waktuberangkat}" />
                                         </select>
                                     </td>
@@ -113,7 +115,7 @@
                                     <td>
                                         <div class="form-group">
                                             <label for="tanggalberangkat">Tanggal Berangkat</label>
-                                            <input type="date" name="pengajuantanggalberangkat" id="tanggalberangkat" class="form-control">
+                                            <input type="date" name="pengajuantanggalberangkat" id="tanggalberangkat" class="form-control" required="required">
 
 
                                         </div>
@@ -126,7 +128,7 @@
                                     <td>
                                         <div class="form-group">
                                             <label for="tanggalpulang">Tanggal Pulang</label>
-                                            <input type="date" name="pengajuantanggalpulang" id="tanggalpulang" class="form-control">   
+                                            <input type="date" name="pengajuantanggalpulang" id="tanggalpulang" class="form-control" required="required">   
                                         </div>
                                         </div>
                                     </td>
@@ -135,7 +137,7 @@
                                 </tr>
                                 <tr>
                                     <td>Hotel</td>
-                                    <td><input type="text" name="pengajuanhotel" maxlength="100" required="required" /></td>
+                                    <td><input type="text" name="pengajuanhotel" maxlength="100" required="required" id="hotel" onkeyup="validasi();" /></td>
 
                                     <td><input type="hidden" th:field="${pengajuan.deleted}" th:value="${pengajuan.deleted='enable'}"/></td>
                                 </tr>
@@ -157,6 +159,17 @@
 
     <script type="text/javascript">
 
+        function validasi(){
+            var element1 = document.getElementById('kotaasal');
+            var element2 = document.getElementById('kotatujuan');
+            var element3 = document.getElementById('hotel');
+            
+            element1.value = element1.value.replace(/[^a-zA-z/.,""() ]/,'');
+            element2.value = element2.value.replace(/[^a-zA-z/.,""() ]/,'');
+            element3.value = element3.value.replace(/[^a-zA-z/"".,&() ]+/,'');
+        };
+
+
         $("#tanggalpulang").change(function () {
         var tanggalberangkat = document.getElementById("tanggalberangkat").value;
         var tanggalpulang = document.getElementById("tanggalpulang").value;
@@ -164,6 +177,17 @@
         if (Date.parse(tanggalpulang) <= Date.parse(tanggalberangkat)) {
         alert("Tanggal Berangkat tidak boleh kurang dari Tanggal Pulang");
         document.getElementById("tanggalpulang").value = "";
+        }
+        });
+
+
+        $("#tanggalberangkat").change(function () {
+        var tanggalberangkat = document.getElementById("tanggalberangkat").value;
+        var tanggalpulang = document.getElementById("tanggalpulang").value;
+
+        if (Date.parse(tanggalpulang) <= Date.parse(tanggalberangkat)) {
+        alert("Tanggal Berangkat tidak boleh kurang dari Tanggal Pulang");
+        document.getElementById("tanggalberangkat").value = "";
         }
         });
 

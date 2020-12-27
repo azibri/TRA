@@ -46,4 +46,9 @@ public class DivisiImplement implements DivisiInterface{
         return repoDivisi.findById(divisi_id);
     }
     
+    @Override
+    public Divisi caridivisi(Integer divisi_id) {
+        return repoDivisi.caridivisi(divisi_id);
+    }
+    
 }

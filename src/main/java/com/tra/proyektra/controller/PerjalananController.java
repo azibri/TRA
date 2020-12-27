@@ -96,6 +96,7 @@ public class PerjalananController {
 
         Perjalanan perjalanan = new Perjalanan();
         model.addAttribute("perjalanan", perjalanan);
+        
 
         Integer cariperjalanan = pengajuanInterface.pilih(pengajuan).getPengajuanId();
 
@@ -125,6 +126,7 @@ public class PerjalananController {
         model.addAttribute("tanggalberangkat", tanggalberangkat1);
         model.addAttribute("tanggalpulang", tanggalpulang1);
         model.addAttribute("hotel", hotel1);
+        
 
 //        Iterable<Pengajuan> baik = pengajuanInterface.simpanperjalanan(perjalanan);
 //        model.addAttribute("perjalanan", baik);
@@ -213,7 +215,7 @@ public class PerjalananController {
 //
 //        return "redirect:/pengajuan";
 //    }
-    @RequestMapping(value = "/saveperjalanan", method = RequestMethod.POST)
+    @RequestMapping(value = "/saveperjalanan", method = {RequestMethod.GET, RequestMethod.POST})
     public String saveperjalanan(
             @RequestParam("perjalananpengajuan") Integer pengajuan_id,
             @RequestParam("perjalanankaryawan") String karyawan,
@@ -228,7 +230,9 @@ public class PerjalananController {
             @RequestParam("perjalananhotel") String hotel,
             @RequestParam("perjalanantotaldiem") Integer totaldiem
     ) throws ParseException {
-
+        
+        pengajuanInterface.deletePengajuan(pengajuan_id);
+        
         //parse String to Date
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date tanggalpengajuan = formatter.parse(tanggalberangkat);
@@ -275,12 +279,23 @@ public class PerjalananController {
         return "redirect:/perjalanan";
     }
 
-    @RequestMapping(value = "/deleteperjalanan/{id}", method = RequestMethod.GET)
-    public String deleteperjalanan(@PathVariable(name = "id") int perjalanan_id) {
-        perjalananInterface.deletePerjalanan(perjalanan_id);
-
-        return "redirect:/perjalanan";
-    }
+//    @RequestMapping(value = "/saveperjalanan/{id}", method = RequestMethod.POST, params = "action/delete")
+//    public String softdeletepengajuan(@PathVariable(name = "id") int pengajuan_id) {
+//        pengajuanInterface.deletePengajuan(pengajuan_id);
+//        
+//        return "redirect:/perjalanan";
+//    }
+//    @RequestMapping(value = "/deletepengajuan/{id}", method = RequestMethod.POST)
+//    public void softdeletepengajuan(@PathVariable(name = "id") int pengajuan_id) {
+//        pengajuanInterface.deletePengajuan(pengajuan_id);
+//    }
+    
+    
+//    @RequestMapping(value = "/deletepengajuan/{id}", method = RequestMethod.GET)
+//    public String deletepengajuan(@PathVariable(name = "id") int pengajuan_id) {
+//        pengajuanInterface.deletePengajuan(pengajuan_id);
+//        return "redirect:/pengajuan";
+//    }
 
     @RequestMapping(value = "/template/{id}")
     public String email(@PathVariable(name = "id") int email, Model model) throws Exception {

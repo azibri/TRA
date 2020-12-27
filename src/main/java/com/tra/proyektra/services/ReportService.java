@@ -42,6 +42,10 @@ public class ReportService {
         return (List<Perjalanan>) repoPerjalanan.findAll();
     }
     
+//    public List<Perjalanan> perperjalanan(Integer perjalanan_id) {
+//        return repoPerjalanan.perperjalanan(perjalanan_id);
+//    }
+    
 //    @Autowired
 //    private PengajuanInterface pengajuanInterface;
 //    

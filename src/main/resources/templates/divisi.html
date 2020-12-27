@@ -80,14 +80,14 @@
                                 <!--<input type="hidden" id="id" name="id" value="" th:field="*{tujuandinasId}">-->
 
                                 <div class="form-group">
-                                    Nama Tujuan Dinas
-                                    <input th:field="*{divisiNama}" type="text" maxlength="50" class="form-control">
+                                    Nama Divisi
+                                    <input th:field="*{divisiNama}" type="text" maxlength="50" class="form-control" required="required" id="nama1" onkeyup="validasi();">
                                 </div>
 
 
                                 <div class="form-group">
                                     Keterangan
-                                    <textarea th:field="*{divisiKeterangan}" maxlength="100" class="form-control"></textarea>
+                                    <textarea th:field="*{divisiKeterangan}" maxlength="100" class="form-control" required="required" id="keterangan1" onkeyup="validasi();"></textarea>
                                 </div>
 
                         </div>
@@ -131,13 +131,13 @@
 
                                 <div class="form-group">
                                     Nama Tujuan Dinas
-                                    <input id="nama" name="divisiNama" type="text" maxlength="50" class="form-control">
+                                    <input id="nama" name="divisiNama" type="text" maxlength="50" class="form-control" required="required" onkeyup="validasi();">
                                 </div>
 
 
                                 <div class="form-group">
                                     Keterangan
-                                    <textarea id="keterangan" name="divisiKeterangan" maxlength="100" class="form-control"></textarea>
+                                    <textarea id="keterangan" name="divisiKeterangan" maxlength="100" class="form-control" required="required" onkeyup="validasi();"></textarea>
                                 </div>
 
                         </div>
@@ -159,6 +159,18 @@
     </body>
 
     <script type="text/javascript">
+
+    function validasi() {
+        var element1 = document.getElementById('nama1');
+        var element2 = document.getElementById('keterangan1');
+        var element3 = document.getElementById('nama');
+        var element4 = document.getElementById('keterangan');
+
+        element1.value = element1.value.replace(/[^A-Za-z/,.""&() ]+/,'');
+        element2.value = element2.value.replace(/[^A-Za-z/,.""&()\n ]+/,'');
+        element3.value = element3.value.replace(/[^A-Za-z/,.""&() ]+/,'');
+        element4.value = element4.value.replace(/[^A-Za-z/,.""&()\n ]+/,'');
+    };
 
 
         $('document').ready(function() {

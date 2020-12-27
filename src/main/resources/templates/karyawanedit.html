@@ -15,7 +15,9 @@
                                 <br />
                                 <form th:action="@{/savekaryawan}" th:object="${karyawan}" method="POST" id="edit">
                              
-                                        <table border="0" cellpadding="10" >
+                                <table border="0" cellpadding="10" >
+
+                                <input type="hidden" name="karyawan" required="required" th:value="${karyawan_id}" >
                                 <!--<tr>
                                     <td>Karyawan ID</td>
                                     <td><input type="text" th:field="*{karyawanId}" readonly="readonly" /></td>
@@ -23,55 +25,62 @@
 
                                 <tr>
                                     <td>Pilih Divisi</td>
-                                                        <td>
-                                        <select class="form-control" th:field="${karyawan.divisiId}">
-                                            <option value="0">Select Divisi</option>
-                                            <option th:each="divisi : ${listdivisi}" th:value="${divisi.divisiId}" th:text="${divisi.divisiNama}"></option>
-                                        </select>
-                                                        </td>
+                                        <td>
+                                            <select class="form-control" name="divisi" required="required">
+                                                <option value="" disabled="" selected="">Select Divisi</option>
+                                                <option th:each="divisi : ${listdivisi}" th:value="${divisi.divisiId}" th:text="${divisi.divisiNama}" th:selected="${divisi.divisiId}==${divisi_id}"></option>
+                                            </select>
+                                        </td>
                                 </tr>
 
                                 <tr>
                                     <td>Nama Karyawan</td>
-                                    <td><input type="text" th:field="*{karyawanNama}" maxlength="50" /></td>
+                                    <td><input type="text" name="nama" th:value="${karyawannama}" maxlength="50" required="required" id="karyawan" onkeyup="validasi();" /></td>
                                 </tr>
                                 <tr>
                                     <td>Jenis Kelamin</td>
-                                    <td><input type="text" th:field="*{karyawanJenisKelamin}" /></td>
+                                    <td>
+                                        <input type="radio" name="jeniskelamin" th:checked="${karyawanjeniskelamin=='Laki-laki'}" value="Laki-laki" required="required"> Laki-laki</input>&nbsp&nbsp
+                                        <input type="radio" name="jeniskelamin" th:checked="${karyawanjeniskelamin=='Perempuan'}" value="Perempuan" required="required"> Perempuan</input>
+                                    </td>
+                                    <!--<td><input type="text" th:field="*{karyawanJenisKelamin}" required="required" /></td>-->
                                 </tr>
                                 <tr>
                                     <td>Tanggal Lahir</td>
                                     <td>
+                                        <input type="date" name="tanggallahir" th:value="${karyawantanggallahir}" required="required">
+                                    </td>
+                                    <!--<td>
                                         <div class="input-group date">
-                                            <input type="text" id="tanggallahir" th:field="*{karyawanTanggalLahir}">
+                                            <input type="text" id="tanggallahir" th:field="*{karyawanTanggalLahir}" required="required">
                                             <div class="input-group-append">
                                                 <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                                             </div>
                                         </div>
-                                    </td>
+                                    </td>-->
                                     <!--<td>Tanggal Lahir</td>
                                     <td><input type="text" th:field="*{karyawanTanggalLahir}" /></td>-->
                                 </tr>
                                 <tr>
                                     <td>Email</td>
-                                    <td><input type="email" th:field="*{karyawanEmail}" maxlength="50" /></td>
+                                    <td><input type="email" name="email" maxlength="50" th:value="${karyawanemail}" required="required" /></td>
                                 </tr>
                                 <tr>
                                     <td>Alamat</td>
-                                    <td><input type="text" th:field="*{karyawanAlamat}" maxlength="50"/></td>
+                                    <td><input type="text" name="alamat" maxlength="50" th:value="${karyawanalamat}" required="required" /></td>
                                 </tr>
                                 <tr>
                                     <td>Role</td>
-                                    <td><input type="text" th:field="*{karyawanRole}" maxlength="20"/></td>
+                                    <td><input type="text" name="role" maxlength="20" th:value="${karyawanrole}" required="required" id="role" onkeyup="validasi();" /></td>
                                 </tr>
 
-                                <input type="hidden" th:field="*{karyawanPassword}" />
-                                <input type="hidden" th:field="*{active}" />
+                                <!--<input type="hidden" th:field="*{karyawanPassword}" />
+                                <input type="hidden" th:field="*{active}" />-->
 
                                 <td colspan="2" th:insert="button :: button.create"></td>                    
                                 </tr>
-                                            </table>
-                                    </form>
+                                </table>
+                                </form>
                             </div>
 
 
@@ -85,6 +94,14 @@
     </body>
 
     <script type="text/javascript">
+
+        function validasi() {
+            var element1 = document.getElementById('karyawan');
+            var element2 = document.getElementById('role');
+
+            element1.value = element1.value.replace(/[^A-Za-z ]+/,'');
+            element2.value = element2.value.replace(/[^A-Za-z_ ]+/,'');
+        }
 
         $('.input-group.date').datepicker({
         autoclose: true,

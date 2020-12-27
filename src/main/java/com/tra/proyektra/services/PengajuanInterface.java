@@ -59,7 +59,9 @@ public interface PengajuanInterface {
     
     public long pengajuanuser(String usernama);
     
-    public List<PengajuanList> totalpengajuan();
+    public List<Object[]> totalpengajuan();
+    
+    public List<Object[]> totalpengajuanuser(String nama);
     
     
     

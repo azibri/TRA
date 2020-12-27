@@ -16,7 +16,10 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <a id="exampleModal" aria-labelledby="exampleModal" class="btn btn-primary nBtn" data-toggle="modal" data-target="#modalcreate">Create</a>
+                                    <div align="left">
+                                        <a data-toggle="modal" data-target="#modalcreate" th:insert = "button :: button.create"></a>
+                                    </div>
+                                    <!--<a id="exampleModal" aria-labelledby="exampleModal" class="btn btn-primary nBtn" data-toggle="modal" data-target="#modalcreate">Create</a>-->
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -80,12 +83,12 @@
 
                                 <div class="form-group">
                                     Nama Jenis Kendaraan
-                                    <input name="kendaraanNama" type="text" maxlength="50" class="form-control">
+                                    <input name="kendaraanNama" type="text" maxlength="50" class="form-control" required="required" id="nama1" onkeyup="validasi();">
                                 </div>
 
                                 <div class="form-group">
                                     Keterangan
-                                    <textarea class="form-control" name="kendaraanKeterangan" maxlength="100"></textarea>
+                                    <textarea class="form-control" name="kendaraanKeterangan" maxlength="100" required="required" id="keterangan1" onkeyup="validasi();"></textarea>
                                 </div>
 
 
@@ -134,12 +137,12 @@
 
                                 <div class="form-group">
                                     Nama Jenis Kendaraan
-                                    <input id="nama" name="kendaraanNama" type="text" maxlength="50" class="form-control">
+                                    <input id="nama" name="kendaraanNama" type="text" maxlength="50" class="form-control" required="required" onkeyup="validasi();">
                                 </div>
 
                                 <div class="form-group">
                                     Keterangan
-                                    <textarea class="form-control" id="keterangan" name="kendaraanKeterangan" maxlength="100"></textarea>
+                                    <textarea class="form-control" id="keterangan" name="kendaraanKeterangan" maxlength="100" required="required" onkeyup="validasi();"></textarea>
                                 </div>
 
 
@@ -163,6 +166,18 @@
     </body>
 
     <script type="text/javascript">
+
+        function validasi() {
+            var element1 = document.getElementById('nama1');
+            var element2 = document.getElementById('keterangan1');
+            var element3 = document.getElementById('nama');
+            var element4 = document.getElementById('keterangan');
+
+            element1.value = element1.value.replace(/[^A-Za-z/,.""&() ]+/,'');
+            element2.value = element2.value.replace(/[^A-Za-z/,.""&()\n ]+/,'');
+            element3.value = element3.value.replace(/[^A-Za-z/,.""&() ]+/,'');
+            element4.value = element4.value.replace(/[^A-Za-z/,.""&()\n ]+/,'');
+        }
 
 
         $('document').ready(function() {

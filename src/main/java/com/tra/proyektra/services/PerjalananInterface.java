@@ -34,7 +34,12 @@ public interface PerjalananInterface {
     
     long diproses();
     
-    long rerata();
+    float rerata();
+    
+    public List<Object[]> perjalanan();
+    
+    public Perjalanan perperjalanan(Integer perjalanan_id);
+//    public List<Perjalanan> perperjalanan(Integer perjalanan_id);
     
 //    public Perjalanan caripengajuan(Integer pengajuanid);
     

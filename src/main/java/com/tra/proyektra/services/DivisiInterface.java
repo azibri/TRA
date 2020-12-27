@@ -25,4 +25,6 @@ public interface DivisiInterface {
         
     void deletedivisi (Integer divisi_id);
     
+    public Divisi caridivisi(Integer divisi_id);
+    
 }

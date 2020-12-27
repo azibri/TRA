@@ -35,15 +35,15 @@ public class PengajuanImplement implements PengajuanInterface {
     @Autowired
     private RepoPengajuan repoPengajuan;
     
-    @Autowired
-    private RepoPerjalanan repoPerjalanan;
+//    @Autowired
+//    private RepoPerjalanan repoPerjalanan;
 
 //    @Autowired
 //    EntityManager entityManager;
 
     @Override
     public Iterable<Pengajuan> findAllpengajuan() {
-        return repoPengajuan.findAll();
+        return repoPengajuan.findAllpengajuan();
     }
 
     @Override
@@ -206,7 +206,7 @@ public class PengajuanImplement implements PengajuanInterface {
 
     @Override
     public long hitung() {
-        return repoPengajuan.count();
+        return repoPengajuan.hitung();
     }
 
     @Override
@@ -235,8 +235,17 @@ public class PengajuanImplement implements PengajuanInterface {
     }
 
     @Override
-    public List<PengajuanList> totalpengajuan() {
+    public List<Object[]> totalpengajuan() {
         return repoPengajuan.totalpengajuan();
+    }
+//    @Override
+//    public List<PengajuanList> totalpengajuan() {
+//        return repoPengajuan.totalpengajuan();
+//    }
+
+    @Override
+    public List<Object[]> totalpengajuanuser(String nama) {
+        return repoPengajuan.totalpengajuanuser(nama);
     }
 
 

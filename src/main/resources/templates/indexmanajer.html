@@ -9,6 +9,7 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--<script type="text/javascript" th:src="@{/Chart.min.js}"></script>-->
     </head>
     <body>
 
@@ -68,7 +69,8 @@ and open the template in the editor.
                         <div class="card-header">
                             Pengajuan Ijin Perjalanan Dinas</div>
                         <div class="card-body">
-                            <div id="chart-indexmanajer" width="100%" height="30"></div>
+                            <!--<div id="chart-indexmanajer" width="100%" height="30"></div>-->
+                            <canvas id="chart-indexmanajer"></canvas>
                         </div>
                     </div>
 
@@ -79,47 +81,103 @@ and open the template in the editor.
 
     </body>
 
-    <script th:inline="javascript">
-            var periode = [[${
-                bulanpengajuan
-            }
-            ]];
-            var pengajuan = [[${jumlahpengajuan}
-            ]];
-            var year = new Date();
-            year = year.getFullYear();
-            console.log(year);
+    <script>
+        
+        $.get("/totalpengajuan", function(totalpengajuan) {
+        console.log(totalpengajuan)
+        var periode = [];
+        var pengajuan = [];
+        for(var i=0; i<totalpengajuan.length; i++) {
+        periode.push(totalpengajuan[i][0])
+        pengajuan.push(totalpengajuan[i][1])
+        }
+
+        
+        var barchart = document.getElementById('chart-indexmanajer');
+        var chart = new Chart(barchart, {
+        type: 'bar',
+        data:{
+        labels: periode,
+        datasets:[{
+        label : 'Jumlah Pengajuan',
+        data : pengajuan,
+        backgroundColor : "#3366ff"
+        }]
+        }
+
+        });
+
+        });
+        
+        
+        
 
 
-            document.addEventListener('DOMContentLoaded', function () {
-                const chart = Highcharts.chart('chart-indexmanajer', {
-                    chart: {
-                        type: 'line'
-                    },
-                    title: {
-                        text: 'Pengajuan'
-                    },
-                    xAxis: {
-                        categories: periode
-                    },
-                    yAxis: {
-                        title: {
-                            text: ''
+    </script>
+    <!--    <script th:inline="javascript">
+    
+    var linechart = document.getElementById('chart-indexmanajer');
+        var chart = new Chart(linechart, {
+        type: 'line',
+        data:{
+        labels: periode,
+        datasets: [
+        {
+        label: 'Data Pengajuan',
+        data: pengajuan,
+        fill: false,
+        lineTension: 0.1,
+        backgroundColor: '#3333ff',
+        borderColor: '#3333ff',
+        pointHoverBackgroundColor: '#99ccff',
+        pointHoverBorderColor: '#99ccff'
+        } 
+        ]
+        }
+        });
+    
+    
+    
+    var periode = [[${
+                    bulanpengajuan
+                }
+                ]];
+                var pengajuan = [[${jumlahpengajuan}
+                ]];
+                var year = new Date();
+                year = year.getFullYear();
+                console.log(year);
+    
+    
+                document.addEventListener('DOMContentLoaded', function () {
+                    const chart = Highcharts.chart('chart-indexmanajer', {
+                        chart: {
+                            type: 'line'
                         },
-                        labels: {
-
-                            enabled: false
-                        }
-                    },
-                    series: [
-                        {
-                            name: 'Tahun ' + year,
-                            data: pengajuan
-                        }
-                    ]
+                        title: {
+                            text: 'Pengajuan'
+                        },
+                        xAxis: {
+                            categories: periode
+                        },
+                        yAxis: {
+                            title: {
+                                text: ''
+                            },
+                            labels: {
+    
+                                enabled: false
+                            }
+                        },
+                        series: [
+                            {
+                                name: 'Tahun ' + year,
+                                data: pengajuan
+                            }
+                        ]
+                    });
                 });
-            });
-        </script>
+            </script>-->
     <!--    <script th:inline="text/javascript">
     
             var linechart = document.getElementById('chart-indexmanajer');

@@ -5,8 +5,11 @@
  */
 package com.tra.proyektra.services;
 
+import com.tra.proyektra.entities.Divisi;
 import com.tra.proyektra.entities.Karyawan;
 import com.tra.proyektra.repository.RepoKaryawan;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -70,5 +73,30 @@ public class KaryawanImplement implements KaryawanInterface {
     public long karyawan() {
         return repoKaryawan.count();
     }
+
+//    @Override
+//    public void savekaryawan(Karyawan karyawan, Date tanggallahir2) {
+//        repoKaryawan.save(karyawan, tanggallahir2);
+//    }
+
+//    @Override
+//    public void savekaryawan(String divisi_id, String namakaryawan, String jeniskelamin, Date tanggallahir2, String email, String alamat, String role) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+
+    @Override
+    public void savekaryawan(Integer karyawan_id, Integer divisi_id, String namakaryawan, String jeniskelamin, Date tanggallahir2, String email, String alamat, String role) {
+
+        Karyawan karyawan = new Karyawan(karyawan_id, new Divisi(divisi_id), namakaryawan, jeniskelamin, 
+                tanggallahir2, email, alamat, role);
+        repoKaryawan.save(karyawan);
+    }
+
+    @Override
+    public List<Object[]> jeniskelamin() {
+        return repoKaryawan.jeniskelamin();
+    }
+
+    
     
 }

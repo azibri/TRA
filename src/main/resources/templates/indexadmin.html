@@ -51,7 +51,7 @@ and open the template in the editor.
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="col-xl-3 col-sm-6 mb-3">
                             <div class="card text-white bg-danger o-hidden h-100">
                                 <div class="card-body">
@@ -64,6 +64,25 @@ and open the template in the editor.
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-xl-4 col-sm-6 mb-3">
+                            <div class="card">
+                                <div class="card-header">Jumlah Karyawan</div>
+                                <div class="card-body">
+                                    <canvas id="jeniskelamin-chart" width="100%"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-8 col-sm-6 mb-3">
+                            <div class="card">
+                                <div class="card-header">Perjalanan</div>
+                                <div class="card-body">
+                                    <canvas id="perjalanan-chart" width="100%"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -80,4 +99,67 @@ and open the template in the editor.
 
 
     </body>
+
+    <script>
+
+        $.get("/jeniskelamin", function(jeniskelamin) {
+        console.log(jeniskelamin)
+        var jeniskelaminn = [];
+        var jumlah = [];
+        for (var i = 0; i < jeniskelamin.length; i++) {
+        jeniskelaminn.push(jeniskelamin[i][0])
+        jumlah.push(jeniskelamin[i][1])
+        }
+
+        var piechart = document.getElementById('jeniskelamin-chart');
+        var chart = new Chart(piechart, {
+        type: 'pie',
+        data:{
+        labels: jeniskelaminn,
+        datasets:[{
+        label : 'Jumlah Karyawan',
+        data : jumlah,
+        backgroundColor : ["#3366ff","#FF6384"],
+        }]
+        }
+
+        });
+
+        });
+
+
+
+        $.get("/grafikperjalanan", function(perjalanan) {
+        console.log(perjalanan)
+        var periode = [];
+        var perjalanann = [];
+        for (var i = 0; i < perjalanan.length; i++) {
+        periode.push(perjalanan[i][0])
+        perjalanann.push(perjalanan[i][1])
+        }
+
+        var piechart = document.getElementById('perjalanan-chart');
+        var chart = new Chart(piechart, {
+        type: 'line',
+        data:{
+        labels: periode,
+        datasets:[{
+        label: 'Perjalanan',
+        data: perjalanann,
+        fill: false,
+        lineTension: 0.1,
+        backgroundColor: '#3333ff',
+        borderColor: '#3333ff',
+        pointHoverBackgroundColor: '#99ccff',
+        pointHoverBorderColor: '#99ccff'
+        }]
+        }
+
+        });
+
+        });
+
+
+    </script>
+
 </html>

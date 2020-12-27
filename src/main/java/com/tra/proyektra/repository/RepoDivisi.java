@@ -6,6 +6,7 @@
 package com.tra.proyektra.repository;
 
 import com.tra.proyektra.entities.Divisi;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -13,5 +14,7 @@ import org.springframework.data.repository.CrudRepository;
  * @author asus
  */
 public interface RepoDivisi extends CrudRepository<Divisi, Integer>{
-    
+    @Query(value = "SELECT * FROM divisi INNER JOIN karyawan ON "
+            + "divisi.divisi_id=karyawan.divisi_id WHERE karyawan_id = ?1", nativeQuery = true)
+    public Divisi caridivisi(Integer divisiid);
 }

@@ -117,9 +117,19 @@ public class PerjalananImplement implements PerjalananInterface{
     }
 
     @Override
-    public long rerata() {
+    public float rerata() {
         return repoPerjalanan.rerata();
     }
+
+    @Override
+    public List<Object[]> perjalanan() {
+        return repoPerjalanan.perjalanan();
+    }
+    @Override
+    public Perjalanan perperjalanan(Integer perjalanan_id) {
+        return repoPerjalanan.findById(perjalanan_id).get();
+    }
+    
 
     
 

@@ -62,7 +62,7 @@
 
                                                 <a th:href="@{update/{id}?approval=1 (id=${pengajuan.pengajuanId})}"
                                                    th:classappend="${pengajuan.approvalId.approvalNama} != 'pending' ? 'disabled' : '' " 
-                                                   class="btn btn-success btn-sm" role="button"
+                                                   class="accept btn btn-success btn-sm" role="button"
                                                    th:data-id="${pengajuan.pengajuanId}">Accept</a>
 
                                                 <!--<a th:href="@{update/{id}?approval=1 (id=${pengajuan.pengajuanId})}"
@@ -73,7 +73,7 @@
 
                                                 <a th:href="@{update/{id}?approval=0 (id=${pengajuan.pengajuanId})}"
                                                    th:classappend="${pengajuan.approvalId.approvalNama} != 'pending' ? 'disabled' : '' " 
-                                                   class="btn btn-danger btn-sm" role="button"
+                                                   class="decline btn btn-danger btn-sm" role="button"
                                                    th:data-id="${pengajuan.pengajuanId}">Decline</a>
 
                                                 <!--<input type="hidden" th:value="${pengajuan.approvalId='1'}">-->
@@ -224,9 +224,6 @@
         });
         });
 
-
-
-
         document.querySelector('#rincian').addEventListener('submit', function(e) {
         var form = this;
 
@@ -246,6 +243,67 @@
         }
         })
         });
+
+
+
+
+        $('.accept').click(function(e) {
+        e.preventDefault();
+        var id = $(this).attr(`data-id`);
+        console.log(id);
+        acceptdata(id);
+        });
+
+        function acceptdata(id) {
+
+        Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Accept it!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+        Swal.fire(
+        'Accept!',
+        'Your file has been Accept.',
+        'success'
+        ),window.location = "/update/" + id +"?approval=1";
+        }
+        })
+        }
+
+
+        $('.decline').click(function(e) {
+        e.preventDefault();
+        var id = $(this).attr(`data-id`);
+        console.log(id);
+        declinedata(id);
+        });
+
+        function declinedata(id) {
+
+        Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Decline it!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+        Swal.fire(
+        'Decline!',
+        'Your file has been Decline.',
+        'success'
+        ),window.location = "/update/" + id +"?approval=0";
+        }
+        })
+        }
+
 
     </script>
 

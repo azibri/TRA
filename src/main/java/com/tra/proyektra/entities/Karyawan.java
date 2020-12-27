@@ -113,6 +113,17 @@ public class Karyawan implements Serializable {
         this.karyawanAlamat = karyawanAlamat;
         this.karyawanRole = karyawanRole;
     }
+    
+    public Karyawan(Integer karyawanId, Divisi divisi, String karyawanNama, String karyawanJenisKelamin, Date karyawanTanggalLahir, String karyawanEmail, String karyawanAlamat, String karyawanRole) {
+        this.karyawanId = karyawanId;
+        this.divisiId = divisi;
+        this.karyawanNama = karyawanNama;
+        this.karyawanJenisKelamin = karyawanJenisKelamin;
+        this.karyawanTanggalLahir = karyawanTanggalLahir;
+        this.karyawanEmail = karyawanEmail;
+        this.karyawanAlamat = karyawanAlamat;
+        this.karyawanRole = karyawanRole;
+    }
 
     public Integer getKaryawanId() {
         return karyawanId;
