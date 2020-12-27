@@ -20,11 +20,11 @@ and open the template in the editor.
         <form  th:action="@{/dologin}" method="POST">
 
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Nama Lengkap" name="username"/>
+                <input type="text" class="form-control" required="required" placeholder="Nama Lengkap" name="username"/>
             </div>
 
             <div class="input-group">
-                <input type="password" class="form-control" placeholder="Password" name="password"/>
+                <input type="password" class="form-control" required="required" placeholder="Password" name="password"/>
             </div>
 
             <input type="submit" id="masuk" value="Log In" name="submit" />
