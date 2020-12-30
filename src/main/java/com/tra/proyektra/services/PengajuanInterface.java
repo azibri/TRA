@@ -45,7 +45,7 @@ public interface PengajuanInterface {
     
     public Pengajuan caripengajuan(Integer pengajuanid);
     
-    Optional<Pengajuan> findpengajuan(Integer pengajuan_id);
+    Optional<Pengajuan> komentar(Integer pengajuan_id);
     
     public Pengajuan pilih (Integer pengajuanid);
     

@@ -63,7 +63,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input type="time" id="time" name="perjalananwaktuberangkat"  placeholder="Time" class="form-control" required="required"/>
+                                        <input type="time" id="timeberangkat" name="perjalananwaktuberangkat" th:data-id="${waktuberangkat}"  placeholder="Time" class="form-control" required="required" min=""  max="" />
                                         <!--<div class="input-group date" id="event_time">
                                             <input type="text" id="time" th:field="*{perjalananWaktuBerangkat}" placeholder="Time" class="form-control" />
                                             <div class="input-group-addon input-group-append">
@@ -89,7 +89,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input type="time" th:value="${waktupulang}" id="time" name="perjalananwaktupulang"  placeholder="Time" class="form-control" required="required" />
+                                        <input type="time" th:data-id="${waktupulang}" id="timepulang" name="perjalananwaktupulang"  placeholder="Time" class="form-control" required="required" min=""  max="" />
                                         <!--<div class="input-group date" id="event_time">
                                             <input type="text" id="time" th:field="*{perjalananWaktuPulang}" placeholder="Time" class="form-control" />
                                             <div class="input-group-addon input-group-append">
@@ -144,6 +144,68 @@
     </body>
 
     <script type="text/javascript">
+
+        $('#timeberangkat').change(function() {
+        var timeberangkat1 = $(this).attr(`data-id`);
+        console.log(timeberangkat1);
+
+        if (timeberangkat1 == "00.00 - 06.00") {
+        $("#timeberangkat").attr({
+        "min" : "00:00:00",
+        "max" : "06:00:00"
+        });
+        } else if (timeberangkat1 == "06.00 - 12.00") {
+        $("#timeberangkat").attr({
+        "min" : "06:00:00",
+        "max" : "12:00:00"
+        });
+        } else if (timeberangkat1 == "12.00 - 18.00") {
+        $("#timeberangkat").attr({
+        "min" : "12:00:00",
+        "max" : "18:00:00"
+        });
+        }  else if (timeberangkat1 == "18.00 - 00.00") {
+        $("#timeberangkat").attr({
+        "min" : "18:00:00",
+        "max" : "00:00:00"
+        });
+        }
+
+        });
+
+
+
+        $('#timepulang').change(function() {
+        var timepulang1 = $(this).attr(`data-id`);
+        console.log(timepulang1);
+
+        if (timepulang1 == "00.00 - 06.00") {
+        $("#timepulang").attr({
+        "min" : "00:00:00",
+        "max" : "06:00:00"
+        });
+        } else if (timepulang1 == "06.00 - 12.00") {
+        $("#timepulang").attr({
+        "min" : "06:00:00",
+        "max" : "12:00:00"
+        });
+        } else if (timepulang1 == "12.00 - 18.00") {
+        $("#timepulang").attr({
+        "min" : "12:00:00",
+        "max" : "18:00:00"
+        });
+        }  else if (timepulang1 == "18.00 - 00.00") {
+        $("#timepulang").attr({
+        "min" : "18:00:00",
+        "max" : "00:00:00"
+        });
+        }
+
+        });
+
+
+
+
 
         $("#tanggalpulang").change(function () {
         var tanggalberangkat = document.getElementById("tanggalberangkat").value;

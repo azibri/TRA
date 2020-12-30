@@ -183,7 +183,7 @@ public class PengajuanImplement implements PengajuanInterface {
     }
 
     @Override
-    public Optional<Pengajuan> findpengajuan(Integer pengajuan_id) {
+    public Optional<Pengajuan> komentar(Integer pengajuan_id) {
         return repoPengajuan.findById(pengajuan_id);
     }
 

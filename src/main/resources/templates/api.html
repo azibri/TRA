@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="resource :: sumber">
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+
+    	<table class="table table-bordered" width="60%" cellspacing="0">
+    		<thead>
+    			<tr>
+    				<td>Nama</td>
+    				<td>Email</td>
+    				<td>Tanggal lahir</td>
+    				<td>Tempat lahir</td>
+    				<td>Alamat</td>
+    				<td>Posisi</td>
+    			</tr>
+    		</thead>
+    		<tbody>
+    		<tr th:each="datas: ${datas}"></tr>
+    			<td th:text="${datas.nama}">Nama</td>
+    			<td th:text="${datas.email}">Email</td>
+    			<td th:text="${datas.tanggallahir}">Tanggal Lahir</td>
+    			<td th:text="${datas.tempatlahir}">Tempat Lahir</td>
+    			<td th:text="${datas.alamat}">Alamat</td>
+    			<td th:text="${datas.posisi}">Posisi</td>
+    		</tbody>
+    			
+    	</table>
+
+    </body>
+
+    <script type="text/javascript">
+    	
+    	$(document).ready(function(){
+    		api();
+    	});
+
+    	function api() {
+    		$.ajax({
+    			type : "GET",
+    			url : "http://localhost:8081/restapi",
+    			success : function(response) {
+    				var i = 1;
+    			response.forEach(function(data) {
+    				$("#datadiri").append(
+    					"<tr>" +
+    					"<td>" +
+    					i +
+    					"</td>" +
+    					"<td>" +
+    					data.nama +
+    					"</td>" +
+    					"<td>" +
+    					data.email +
+    					"</td>" +
+    					"<td>" +
+    					data.tanggallahir +
+    					"</td>" +
+    					"<td>" +
+    					data.tempatlahir +
+    					"</td>" +
+    					"<td>" +
+    					data.alamat +
+    					"</td>" +
+    					"<td>" +
+    					data.posisi +
+    					"</td>" +
+    					"</tr>"
+    					);
+    				i++;
+    			});
+    		}
+    		})
+    		
+    	}
+
+
+
+
+    </script>
+
+
+</html>

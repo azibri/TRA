@@ -78,7 +78,13 @@
                                 </tr>
                                 <tr>
                                     <td>Role</td>
-                                    <td><input type="text" name="role" maxlength="20" required="required" id="role" onkeyup="validasi();" /></td>
+                                    <td>
+                                        <select name="role" id="role" required="required">
+                                            <option value="" disabled="" selected="">Pilih Role</option>
+                                            <option th:each="role : ${listrole}" th:value="${role}" th:text="${role}"></option>
+                                        </select>
+                                    </td>
+                                    <!--<td><input type="text" name="role" maxlength="20" required="required" id="role" onkeyup="validasi();" /></td>-->
                                 </tr>
                                 <td colspan="2" th:insert="button :: button.save"></td>
                                 </tr>

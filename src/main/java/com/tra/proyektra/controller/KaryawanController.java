@@ -12,7 +12,9 @@ import com.tra.proyektra.services.DivisiInterface;
 import com.tra.proyektra.services.KaryawanInterface;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,6 +53,9 @@ public class KaryawanController {
         
         model.addAttribute("listdivisi", divisiInterface.findAlldivisi());
         model.addAttribute("listkaryawan", karyawanInterface.findAllKaryawan());
+        
+        List<String> listrole= Arrays.asList("ROLE_USER", "ROLE_MANAJER", "ROLE_ADMIN");
+        model.addAttribute("listrole", listrole);
         
         model.addAttribute("karyawan", karyawan);
         return "/karyawanadd";
@@ -125,8 +130,11 @@ public class KaryawanController {
         model.addAttribute("karyawanemail", email);
         model.addAttribute("karyawanalamat", alamat);
         model.addAttribute("karyawanrole", role);
-        System.out.println(karyawanid);
-        System.out.println(divisiid);
+
+        List<String> listrole = Arrays.asList("ROLE_USER", "ROLE_MANAJER", "ROLE_ADMIN");
+        model.addAttribute("listrole", listrole);
+//        System.out.println(karyawanid);
+//        System.out.println(divisiid);
         
         
 //        model.addAttribute("listdivisi", divisiInterface.findAlldivisi());

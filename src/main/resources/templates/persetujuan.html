@@ -58,6 +58,7 @@
                                                 <a th:href="@{'/editpengajuan/' + ${pengajuan.pengajuanId}}" class="btn btn-warning btn-sm" role="button">Edit</a>
                 
                                                 <a th:href="@{/update/(pengajuan_id=${pengajuan.pengajuanId})}" th:value="${pengajuan.approvalId='1'}" class="accept btn-success btn-sm">Accept</a>-->
+
                                                 <!--<a th:href="@{/komentar/(pengajuan_id=${pengajuan.pengajuanId})}" class="komentar btn btn-warning btn-sm">Komentar</a>-->
 
                                                 <a th:href="@{update/{id}?approval=1 (id=${pengajuan.pengajuanId})}"
@@ -79,11 +80,12 @@
                                                 <!--<input type="hidden" th:value="${pengajuan.approvalId='1'}">-->
                                                 <!--<a th:href="@{/savepengajuan}" class="decline btn-danger btn-sm">Decline</a>-->
                                                 <!--<a th:href="@{/editkendaraan/(kendaraan_id=${kendaraan.kendaraanId})}" class="rincian btn-warning btn-sm">Rincian</a>-->
-                                                <!--                                 <a th:href="@{/editkendaraan/(kendaraan_id=${kendaraan.kendaraanId})}" class="edit btn btn-warning btn-sm">Edit</a>-->
-                                                <!--                            <a th:href="@{'/editpengajuan/' + ${pengajuan.pengajuanId}}" class="btn btn-warning btn-sm" role="button">Edit</a>
-                                                                            <a th:href="@{'/deletepengajuan/' + ${pengajuan.pengajuanId}}" th:data-id='${pengajuan.pengajuanId}' class="delete btn btn-danger btn-sm" role="button">Delete</a>-->
+<!--                                                <a th:href="@{/editkendaraan/(kendaraan_id=${kendaraan.kendaraanId})}" class="edit btn btn-warning btn-sm">Edit</a>
+                                                <a th:href="@{'/editpengajuan/' + ${pengajuan.pengajuanId}}" class="btn btn-warning btn-sm" role="button">Edit</a>
+                                                <a th:href="@{'/deletepengajuan/' + ${pengajuan.pengajuanId}}" th:data-id='${pengajuan.pengajuanId}' class="delete btn btn-danger btn-sm" role="button">Delete</a>-->
                                             </td>
                                         </tr>
+                                        <tr>
                                         <tr class="collapse" th:id="'muncul' + ${iterStat.index}">
                                             <td colspan="3">Nama Karyawan</td>
                                             <td colspan="8" th:text="${pengajuan.karyawanId.karyawanNama}"></td>
@@ -144,7 +146,7 @@
 
                             <!--<form th:action="@{/savekendaraan}" method="put" id="edit">-->
                             <form th:action="@{/savepengajuan}" method="post" id="rincian">
-                                <input type="text" id="id" name="pengajuanId" readonly="readonly">
+                                <input type="text" id="id" name="pengajuanId" readonly="readonly" >
 
                                 <input type="text" id="karyawan"  name="karyawanId"/>
 
@@ -195,8 +197,10 @@
 
     <script type="text/javascript">
 
+
+
         $('document').ready(function() {
-        $('.table .komentar ').on('click', function(event) {
+        $('.table .komentar').on('click', function(event) {
 
         event.preventDefault();
 
@@ -266,11 +270,7 @@
         confirmButtonText: 'Yes, Accept it!'
         }).then((result) => {
         if (result.isConfirmed) {
-        Swal.fire(
-        'Accept!',
-        'Your file has been Accept.',
-        'success'
-        ),window.location = "/update/" + id +"?approval=1";
+        window.location = "/update/" + id +"?approval=1";
         }
         })
         }
@@ -295,11 +295,7 @@
         confirmButtonText: 'Yes, Decline it!'
         }).then((result) => {
         if (result.isConfirmed) {
-        Swal.fire(
-        'Decline!',
-        'Your file has been Decline.',
-        'success'
-        ),window.location = "/update/" + id +"?approval=0";
+        window.location = "/update/" + id +"?approval=0";
         }
         })
         }

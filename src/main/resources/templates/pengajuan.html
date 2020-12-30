@@ -105,11 +105,7 @@
         confirmButtonText: 'Yes, cancel it!'
         }).then((result) => {
         if (result.isConfirmed) {
-        Swal.fire(
-        'Deleted!',
-        'Your file has been cancel.',
-        'success'
-        ),window.location = "/cancelpengajuan/" + id +"?approval=2";
+        window.location = "/cancelpengajuan/" + id +"?approval=2";
         }
         })
         }

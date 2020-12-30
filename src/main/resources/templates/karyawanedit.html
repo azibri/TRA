@@ -71,7 +71,13 @@
                                 </tr>
                                 <tr>
                                     <td>Role</td>
-                                    <td><input type="text" name="role" maxlength="20" th:value="${karyawanrole}" required="required" id="role" onkeyup="validasi();" /></td>
+                                    <td>
+                                        <select name="role" id="role" required="required">
+                                            <option value="" selected="" disabled="">Pilih Role</option>
+                                            <option th:each="role : ${listrole}" th:value="${role}" th:text="${role}" th:selected="${role}==${karyawanrole}"></option>
+                                        </select>
+                                    </td>
+                                    <!--<td><input type="text" name="role" maxlength="20" th:value="${karyawanrole}" required="required" id="role" onkeyup="validasi();" /></td>-->
                                 </tr>
 
                                 <!--<input type="hidden" th:field="*{karyawanPassword}" />

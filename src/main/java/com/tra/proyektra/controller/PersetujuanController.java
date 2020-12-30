@@ -64,9 +64,10 @@ public class PersetujuanController {
        return "/persetujuan";
     }
     
+    
     @RequestMapping(value = "/komentar")
     @ResponseBody
-    public Optional<Pengajuan> findpengajuan(Integer pengajuan_id){
+    public Optional<Pengajuan> komentar(Integer pengajuan_id){
 //        Pengajuan pengajuan = pengajuanInterface.getPengajuan(pengajuan_id);
 //        
 //        Integer ini = pengajuanInterface.getPengajuan(pengajuan_id).getPengajuanId();
@@ -89,7 +90,7 @@ public class PersetujuanController {
 //        model.addAttribute("idkaryawan", nama);
 //        model.addAttribute("karyawan_id", hal);
         
-        return pengajuanInterface.findpengajuan(pengajuan_id);
+        return pengajuanInterface.komentar(pengajuan_id);
     }
 
 //    @RequestMapping(value = "/simpanpengajuan", method = RequestMethod.POST)
