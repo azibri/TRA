@@ -5,7 +5,7 @@
  */
 package com.tra.proyektra.services;
 
-import com.tra.proyektra.config.PengajuanList;
+//import com.tra.proyektra.config.PengajuanList;
 import com.tra.proyektra.entities.Pengajuan;
 import com.tra.proyektra.entities.Perjalanan;
 import java.util.Date;

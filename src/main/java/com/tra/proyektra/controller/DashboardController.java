@@ -5,7 +5,7 @@
  */
 package com.tra.proyektra.controller;
 
-import com.tra.proyektra.config.PengajuanList;
+//import com.tra.proyektra.config.PengajuanList;
 import com.tra.proyektra.entities.Pengajuan;
 import com.tra.proyektra.services.KaryawanInterface;
 import com.tra.proyektra.services.PengajuanInterface;

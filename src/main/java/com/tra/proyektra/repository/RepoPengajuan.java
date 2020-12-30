@@ -5,7 +5,7 @@
  */
 package com.tra.proyektra.repository;
 
-import com.tra.proyektra.config.PengajuanList;
+//import com.tra.proyektra.config.PengajuanList;
 import com.tra.proyektra.entities.Pengajuan;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;

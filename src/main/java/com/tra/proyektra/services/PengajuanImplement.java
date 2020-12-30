@@ -5,7 +5,7 @@
  */
 package com.tra.proyektra.services;
 
-import com.tra.proyektra.config.PengajuanList;
+//import com.tra.proyektra.config.PengajuanList;
 import com.tra.proyektra.entities.Approval;
 import com.tra.proyektra.entities.Karyawan;
 import com.tra.proyektra.entities.Kendaraan;
